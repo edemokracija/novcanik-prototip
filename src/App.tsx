@@ -34,24 +34,11 @@ export function App() {
     </>
   );
 
+  // Full-bleed: app puni cijeli viewport kao prava mobilna aplikacija.
+  // Na širim ekranima centriramo usku kolonu (bez okvira/chromea).
   return (
-    <div className="flex min-h-full flex-col items-center justify-center gap-6 p-4 md:p-8">
-      {/* Desktop: pokaži u okviru telefona. Mobitel: full-bleed. */}
-      <PhoneFrame>{body}</PhoneFrame>
-      <p className="max-w-[20rem] text-center text-xs leading-relaxed text-muted">
-        Design prototip · e-Demokracija novčanik · mock podaci. Funkcionalna jezgra (passkey · Safe · relay)
-        dolazi iz pay.domovina.ai.
-      </p>
-    </div>
-  );
-}
-
-function PhoneFrame({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative w-full max-w-[400px]">
-      <div className="flex h-[calc(100dvh-2rem)] max-h-[840px] min-h-[600px] flex-col overflow-hidden rounded-[2.2rem] bg-page shadow-card ring-1 ring-navy/10 md:h-[840px]">
-        {children}
-      </div>
+    <div className="flex h-[100dvh] justify-center overflow-hidden">
+      <div className="flex h-full w-full max-w-[480px] flex-col overflow-hidden bg-page">{body}</div>
     </div>
   );
 }
