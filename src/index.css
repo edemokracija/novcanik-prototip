@@ -1,0 +1,70 @@
+/* ZonaPro — brand font (Light tijelo, SemiBold naslovi/naglasak).
+   ⚠ Komercijalan font — potvrditi web-embedding licencu prije javnog deploya. */
+@font-face {
+  font-family: 'ZonaPro';
+  src: url('/fonts/ZonaPro-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ZonaPro';
+  src: url('/fonts/ZonaPro-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base sloj — mora biti u @layer base da utility klase pobijede (Tailwind v3). */
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: 'ZonaPro', Inter, 'Segoe UI', system-ui, sans-serif;
+    font-weight: 300;
+    color: #162236;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* e-demokracija.hr potpis: hladna pozadina + dvije suptilne radijalne svjetlosti */
+    background-color: #edf3f8;
+    background-image:
+      radial-gradient(60rem 60rem at 0% 0%, rgba(247, 148, 29, 0.12), transparent 60%),
+      radial-gradient(60rem 60rem at 100% 100%, rgba(46, 87, 145, 0.13), transparent 60%);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: #173863;
+  }
+}
+
+@layer components {
+  /* Eyebrow / kicker — uppercase orange micro-label (živi site) */
+  .eyebrow {
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f7941d;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

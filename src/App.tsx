@@ -1,0 +1,81 @@
+import { useState } from 'react';
+import { Onboarding } from './screens/Onboarding';
+import { Home } from './screens/Home';
+import { Doniraj } from './screens/Doniraj';
+import { Clanarina } from './screens/Clanarina';
+import { Aktivnost } from './screens/Aktivnost';
+import { Primi } from './screens/Primi';
+
+export type Screen = 'home' | 'doniraj' | 'clanarina' | 'aktivnost' | 'primi';
+
+const TABS: { key: Screen; label: string; icon: string }[] = [
+  { key: 'home', label: 'Početna', icon: 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10' },
+  { key: 'doniraj', label: 'Doniraj', icon: 'M12 21s-7-4.5-7-10a4 4 0 017-2 4 4 0 017 2c0 5.5-7 10-7 10z' },
+  { key: 'aktivnost', label: 'Aktivnost', icon: 'M4 18V9M9 18V4M14 18v-6M19 18v-9' },
+  { key: 'primi', label: 'Primi', icon: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM16 16h4v4h-4z' },
+];
+
+export function App() {
+  const [entered, setEntered] = useState(false);
+  const [screen, setScreen] = useState<Screen>('home');
+
+  const body = !entered ? (
+    <Onboarding onEnter={() => setEntered(true)} />
+  ) : (
+    <>
+      <div className="flex-1 overflow-y-auto">
+        {screen === 'home' && <Home go={setScreen} />}
+        {screen === 'doniraj' && <Doniraj />}
+        {screen === 'clanarina' && <Clanarina />}
+        {screen === 'aktivnost' && <Aktivnost />}
+        {screen === 'primi' && <Primi />}
+      </div>
+      <TabBar screen={screen} go={setScreen} />
+    </>
+  );
+
+  return (
+    <div className="flex min-h-full flex-col items-center justify-center gap-6 p-4 md:p-8">
+      {/* Desktop: pokaži u okviru telefona. Mobitel: full-bleed. */}
+      <PhoneFrame>{body}</PhoneFrame>
+      <p className="max-w-[20rem] text-center text-xs leading-relaxed text-muted">
+        Design prototip · e-Demokracija novčanik · mock podaci. Funkcionalna jezgra (passkey · Safe · relay)
+        dolazi iz pay.domovina.ai.
+      </p>
+    </div>
+  );
+}
+
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative w-full max-w-[400px]">
+      <div className="flex h-[calc(100dvh-2rem)] max-h-[840px] min-h-[600px] flex-col overflow-hidden rounded-[2.2rem] bg-page shadow-card ring-1 ring-navy/10 md:h-[840px]">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function TabBar({ screen, go }: { screen: Screen; go: (s: Screen) => void }) {
+  return (
+    <nav className="flex items-stretch justify-around border-t border-hairline bg-surface/95 px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur">
+      {TABS.map((t) => {
+        const active = screen === t.key || (t.key === 'doniraj' && screen === 'clanarina');
+        return (
+          <button
+            key={t.key}
+            onClick={() => go(t.key)}
+            className={`flex flex-1 flex-col items-center gap-1 rounded-2xl py-1.5 text-[0.65rem] font-semibold transition ${
+              active ? 'text-orange' : 'text-muted hover:text-navy'
+            }`}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d={t.icon} />
+            </svg>
+            {t.label}
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
