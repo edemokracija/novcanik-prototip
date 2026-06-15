@@ -1,4 +1,4 @@
-import { account, community, eur, kindLabel, ledger } from '../lib/mock';
+import { account, community, edeur, eur, kindLabel, ledger, loyalty } from '../lib/mock';
 import { Amount, Button, Card, Chip, Fingerprint } from '../components/ui';
 import type { Screen } from '../App';
 
@@ -60,6 +60,20 @@ export function Home({ go }: { go: (s: Screen) => void }) {
           Kao aktivni član imaš pun uvid u rad udruge i pravo predlaganja sadržaja na platformi Agora.
         </p>
       </Card>
+
+      {/* edEUR loyalty — nagrada za rad */}
+      <button onClick={() => go('nagrade')} className="w-full text-left">
+        <Card className="flex items-center justify-between p-5">
+          <div>
+            <p className="eyebrow">Nagrade za rad · edEUR</p>
+            <p className="mt-1 text-lg font-semibold text-navy">{edeur(loyalty.balance)}</p>
+            <p className="mt-0.5 text-sm text-muted">zasluženo radom · zamijeni za EURe →</p>
+          </div>
+          <span className="grid h-11 w-11 place-items-center rounded-pill bg-orange/10 text-lg font-semibold text-orange">
+            ed
+          </span>
+        </Card>
+      </button>
 
       {/* Javni cilj zajednice — transparentnost */}
       <Card className="p-5">

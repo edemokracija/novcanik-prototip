@@ -6,9 +6,10 @@ import { Clanarina } from './screens/Clanarina';
 import { Aktivnost } from './screens/Aktivnost';
 import { Primi } from './screens/Primi';
 import { Projekti } from './screens/Projekti';
+import { Nagrade } from './screens/Nagrade';
 import { PushReminder } from './components/PushReminder';
 
-export type Screen = 'home' | 'doniraj' | 'clanarina' | 'projekti' | 'aktivnost' | 'primi';
+export type Screen = 'home' | 'doniraj' | 'clanarina' | 'projekti' | 'nagrade' | 'aktivnost' | 'primi';
 
 const TABS: { key: Screen; label: string; icon: string }[] = [
   { key: 'home', label: 'Početna', icon: 'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10' },
@@ -48,6 +49,7 @@ export function App() {
         {screen === 'doniraj' && <Doniraj />}
         {screen === 'clanarina' && <Clanarina />}
         {screen === 'projekti' && <Projekti />}
+        {screen === 'nagrade' && <Nagrade />}
         {screen === 'aktivnost' && <Aktivnost />}
         {screen === 'primi' && <Primi />}
       </div>

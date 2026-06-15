@@ -17,6 +17,8 @@ export function PaymentConfirm({
   caption,
   lines,
   footnote,
+  doneTitle = 'Uplata uspješna',
+  linesTitle = 'Razdioba',
   onDone,
 }: {
   open: boolean;
@@ -24,6 +26,8 @@ export function PaymentConfirm({
   caption?: string;
   lines: ConfirmLine[];
   footnote?: string;
+  doneTitle?: string;
+  linesTitle?: string;
   onDone: () => void;
 }) {
   const [phase, setPhase] = useState<'sign' | 'done'>('sign');
@@ -61,13 +65,13 @@ export function PaymentConfirm({
                 <path d="M20 6L9 17l-5-5" />
               </svg>
             </div>
-            <h2 className="mt-5 text-2xl">Uplata uspješna</h2>
+            <h2 className="mt-5 text-2xl">{doneTitle}</h2>
             <p className="mt-1 text-4xl font-semibold tracking-display tabular-nums text-navy">{amount}</p>
             {footnote && <p className="mt-2 text-sm text-muted">{footnote}</p>}
           </div>
 
           <div className="mt-7 rounded-card border border-navy/10 bg-surface p-5 shadow-soft">
-            <p className="eyebrow">Razdioba</p>
+            <p className="eyebrow">{linesTitle}</p>
             <ul className="mt-3 divide-y divide-hairline">
               {lines.map((l) => (
                 <li key={l.label} className="flex items-center justify-between py-2.5">

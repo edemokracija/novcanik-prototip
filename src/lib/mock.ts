@@ -152,5 +152,20 @@ export const projects: Project[] = [
   },
 ];
 
+// ── edEUR: interni loyalty stablecoin (potvrda rada) ───────────────────────
+// Ne-prenosiv (soulbound) — izdaje samo udruga kao potvrdu rada; iz fonda za
+// isplate može se zamijeniti za EURe. Bez P2P → izvan EMT/EMI okvira.
+export const loyalty = {
+  balance: 24, // edEUR
+  fundAvailable: 1250, // EURe dostupno u fondu za isplate
+  log: [
+    { id: 'r1', label: 'Moderiranje rasprave na Agori', amount: 5, when: 'pet, 18:30' },
+    { id: 'r2', label: 'Prijevod dokumenata', amount: 8, when: 'sri, 12:10' },
+    { id: 'r3', label: 'Prisustvo sjednici UO', amount: 3, when: 'pon, 19:00' },
+    { id: 'r4', label: 'Doprinos · 8 tjedana po 30 min', amount: 8, when: 'tijekom mjeseca' },
+  ],
+};
+export const edeur = (n: number) => `${n} edEUR`;
+
 export const dmy = (d: Date) =>
   new Intl.DateTimeFormat('hr-HR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
