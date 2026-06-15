@@ -99,5 +99,58 @@ export function plural(n: number, forms: [string, string, string]) {
   return forms[2];
 }
 
+// ── Namjenski računi / projekti (interna crowdfunding platforma) ───────────
+// Svaki projekt = zaseban namjenski Safe (transparentan, auditabilan). Član
+// usmjerava svoju članarinu na projekte po izboru — ili u Opći fond.
+export type Project = {
+  id: string;
+  name: string;
+  desc: string;
+  raised: number;
+  goal: number;
+  contributors: number;
+  address: string;
+  central?: boolean;
+};
+export const projects: Project[] = [
+  {
+    id: 'opci',
+    name: 'Opći fond udruge',
+    desc: 'Osnovni rad, administracija i troškovi udruge',
+    raised: 1820,
+    goal: 3000,
+    contributors: 112,
+    address: '0x0pć…A1c',
+    central: true,
+  },
+  {
+    id: 'agora',
+    name: 'Platforma Agora',
+    desc: 'Razvoj platforme za sudjelovanje građana',
+    raised: 3220,
+    goal: 5000,
+    contributors: 88,
+    address: '0xA90r…7C4',
+  },
+  {
+    id: 'pravna',
+    name: 'Pravna analiza referenduma',
+    desc: 'Pravni okvir za građanski referendum u RH',
+    raised: 840,
+    goal: 1500,
+    contributors: 41,
+    address: '0xPr4v…9D2',
+  },
+  {
+    id: 'edu',
+    name: 'Edukacija građana',
+    desc: 'Radionice, materijali i kampanje',
+    raised: 610,
+    goal: 2000,
+    contributors: 33,
+    address: '0xEdu…2B7',
+  },
+];
+
 export const dmy = (d: Date) =>
   new Intl.DateTimeFormat('hr-HR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
