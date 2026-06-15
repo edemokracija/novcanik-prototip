@@ -37,6 +37,9 @@ export function Doniraj() {
             ))}
           </div>
           <p className="mt-3 text-center text-xs text-muted">Preporučeno: {eur(30)} mjesečno</p>
+          <p className="mt-2 text-center text-xs leading-relaxed text-muted">
+            Cijeli iznos ide izravno u rad udruge — bez provizija i posrednika.
+          </p>
         </Card>
 
         <Card className="divide-y divide-hairline">

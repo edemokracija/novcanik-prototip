@@ -1,5 +1,5 @@
 import { account, eur } from '../lib/mock';
-import { Button, Card, Chip, ScreenTitle } from '../components/ui';
+import { Button, Card, Chip, FeatureRow, ScreenTitle } from '../components/ui';
 
 const levels = ['Glasnik', 'Tribun', 'Praeco', 'Orator'];
 
@@ -14,7 +14,7 @@ export function Clanarina() {
       />
 
       <div className="space-y-4 px-4">
-        <Card className="border-0 bg-navy p-5 text-white">
+        <Card dark className="p-5">
           <div className="flex items-center justify-between">
             <p className="text-xs uppercase tracking-eyebrow text-white/55">Status</p>
             <Chip tone="live">Aktivno</Chip>
@@ -23,6 +23,15 @@ export function Clanarina() {
             {eur(account.weeklyDues)} <span className="text-lg text-white/60">/ tjedno</span>
           </p>
           <p className="mt-1 text-sm text-white/65">Sljedeća naplata: ponedjeljak, 08:00</p>
+        </Card>
+
+        <Card className="p-5">
+          <p className="eyebrow">Što dobivaš</p>
+          <ul className="mt-3 space-y-2.5">
+            <FeatureRow>Pun uvid u rad udruge i kako se troši svaki euro</FeatureRow>
+            <FeatureRow>Pravo predlaganja sadržaja na platformi Agora</FeatureRow>
+            <FeatureRow>Glas u odlukama zajednice i referendumskim pitanjima</FeatureRow>
+          </ul>
         </Card>
 
         <Card className="p-5">

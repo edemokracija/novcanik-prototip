@@ -38,14 +38,28 @@ export function StatusDot() {
 
 // ── Layout primitives ───────────────────────────────────────────────────────
 
-export function Card({ children, className = '', ...rest }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
+export function Card({
+  children,
+  dark = false,
+  className = '',
+  ...rest
+}: PropsWithChildren<HTMLAttributes<HTMLDivElement> & { dark?: boolean }>) {
+  // `dark` bira navy varijantu BEZ sukoba s bg-surface (bug bijelih kartica).
+  const tone = dark ? 'bg-navy text-white' : 'bg-surface border border-navy/10';
   return (
-    <div
-      className={`rounded-card border border-navy/10 bg-surface shadow-card ${className}`}
-      {...rest}
-    >
+    <div className={`rounded-card shadow-card ${tone} ${className}`} {...rest}>
       {children}
     </div>
+  );
+}
+
+/** Mali redak značajke: orange točka + tekst (opisni onboarding/benefiti). */
+export function FeatureRow({ children }: PropsWithChildren) {
+  return (
+    <li className="flex items-start gap-3">
+      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-pill bg-orange" aria-hidden />
+      <span className="text-[0.95rem] leading-snug text-navy-ink">{children}</span>
+    </li>
   );
 }
 

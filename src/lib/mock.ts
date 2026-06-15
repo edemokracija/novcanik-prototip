@@ -14,6 +14,12 @@ export const account = {
   level: 'Tribun', // Glasnik → Tribun → Praeco → Orator
 };
 
+export const kindLabel: Record<'donacija' | 'clanarina' | 'primljeno', string> = {
+  donacija: 'Donacija',
+  clanarina: 'Članarina',
+  primljeno: 'Primljeno',
+};
+
 export type Tx = {
   id: string;
   kind: 'donacija' | 'clanarina' | 'primljeno';

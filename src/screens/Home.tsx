@@ -1,4 +1,4 @@
-import { account, community, eur, ledger } from '../lib/mock';
+import { account, community, eur, kindLabel, ledger } from '../lib/mock';
 import { Amount, Button, Card, Chip, Fingerprint } from '../components/ui';
 import type { Screen } from '../App';
 
@@ -7,7 +7,7 @@ export function Home({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="space-y-4 px-4 pb-6 pt-4 animate-riseIn">
       {/* Balance kartica — navy, hero */}
-      <Card className="overflow-hidden border-0 bg-navy text-white shadow-card">
+      <Card dark className="overflow-hidden">
         <div className="flex items-center justify-between px-5 pt-5">
           <div className="flex items-center gap-2">
             <div className="grid h-9 w-9 place-items-center rounded-pill bg-white/12">
@@ -56,6 +56,9 @@ export function Home({ go }: { go: (s: Screen) => void }) {
             Detalji
           </Button>
         </div>
+        <p className="mt-3 border-t border-hairline pt-3 text-xs leading-relaxed text-muted">
+          Kao aktivni član imaš pun uvid u rad udruge i pravo predlaganja sadržaja na platformi Agora.
+        </p>
       </Card>
 
       {/* Javni cilj zajednice — transparentnost */}
@@ -90,8 +93,8 @@ export function Home({ go }: { go: (s: Screen) => void }) {
             <div key={t.id} className="flex items-center justify-between px-4 py-3">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-navy-ink">{t.who}</p>
-                <p className="text-xs capitalize text-muted">
-                  {t.kind}
+                <p className="text-xs text-muted">
+                  {kindLabel[t.kind]}
                   {t.recurring ? ' · redovito' : ''}
                 </p>
               </div>

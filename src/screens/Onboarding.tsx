@@ -1,4 +1,4 @@
-import { Button, Eyebrow, Fingerprint } from '../components/ui';
+import { Button, Eyebrow, FeatureRow, Fingerprint } from '../components/ui';
 
 export function Onboarding({ onEnter }: { onEnter: () => void }) {
   return (
@@ -22,9 +22,13 @@ export function Onboarding({ onEnter }: { onEnter: () => void }) {
         </h1>
         <p className="mt-4 text-[0.98rem] leading-relaxed text-muted">
           Novčanik zajednice za <span className="font-semibold text-navy-ink">donacije</span> i{' '}
-          <span className="font-semibold text-navy-ink">članarine</span>. Bez kartica, bez seed-a — samo
-          otisak prsta. Svaka uplata javno vidljiva.
+          <span className="font-semibold text-navy-ink">članarine</span> — izravno, bez posrednika.
         </p>
+        <ul className="mt-6 space-y-3">
+          <FeatureRow>Ulaz otiskom prsta — bez lozinki i seed-a</FeatureRow>
+          <FeatureRow>Svaka uplata javno vidljiva i auditabilna</FeatureRow>
+          <FeatureRow>Doniraj ili plati članarinu u par sekundi</FeatureRow>
+        </ul>
       </div>
 
       <div className="space-y-3">
