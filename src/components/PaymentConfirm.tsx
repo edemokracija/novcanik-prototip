@@ -37,8 +37,9 @@ export function PaymentConfirm({
   if (!open) return null;
 
   return (
-    <div className="absolute inset-0 z-50 flex flex-col bg-page animate-riseIn">
-      {phase === 'sign' ? (
+    <div className="fixed inset-0 z-[60] flex justify-center bg-navy/25 backdrop-blur-sm animate-riseIn">
+      <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-y-auto bg-page">
+        {phase === 'sign' ? (
         <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
           <div className="relative grid h-32 w-32 place-items-center">
             <span className="absolute inset-0 rounded-pill bg-orange/15 animate-pulseDot" />
@@ -89,7 +90,8 @@ export function PaymentConfirm({
             </Button>
           </div>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
