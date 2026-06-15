@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Button, Fingerprint } from './ui';
 
 export type ConfirmLine = { label: string; value: string };
@@ -36,9 +37,9 @@ export function PaymentConfirm({
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-[60] flex justify-center bg-navy/25 backdrop-blur-sm animate-riseIn">
-      <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-y-auto bg-page">
+  return createPortal(
+    <div className="fixed inset-0 z-[60] flex justify-center bg-navy/25 backdrop-blur-sm">
+      <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-y-auto bg-page animate-riseIn">
         {phase === 'sign' ? (
         <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
           <div className="relative grid h-32 w-32 place-items-center">
@@ -92,6 +93,7 @@ export function PaymentConfirm({
         </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
