@@ -50,3 +50,54 @@ export const community = {
 };
 
 export const donationPresets = [10, 30, 50];
+
+// ── Članarina: dvije kategorije ────────────────────────────────────────────
+// Redovni član: 1 €/tjedno. Član upravnog odbora (UO): 3 €/dan.
+// `owed` = nepodmirena razdoblja unatrag (mock).
+export type TierKey = 'redovni' | 'uo';
+export const tiers: Record<
+  TierKey,
+  {
+    key: TierKey;
+    label: string;
+    rate: number;
+    adverb: string; // "tjedno" | "dnevno"
+    unit: [string, string, string]; // hrvatska množina: 1 / 2-4 / 5+
+    periodDays: number;
+    presets: number[];
+    owed: number; // neplaćena razdoblja unatrag
+  }
+> = {
+  redovni: {
+    key: 'redovni',
+    label: 'Redovni član',
+    rate: 1,
+    adverb: 'tjedno',
+    unit: ['tjedan', 'tjedna', 'tjedana'],
+    periodDays: 7,
+    presets: [4, 12, 52],
+    owed: 0,
+  },
+  uo: {
+    key: 'uo',
+    label: 'Upravni odbor',
+    rate: 3,
+    adverb: 'dnevno',
+    unit: ['dan', 'dana', 'dana'],
+    periodDays: 1,
+    presets: [7, 30, 90],
+    owed: 3,
+  },
+};
+
+/** Hrvatska množina po zadnjoj znamenki (1 tjedan / 2-4 tjedna / 5+ tjedana). */
+export function plural(n: number, forms: [string, string, string]) {
+  const m10 = n % 10;
+  const m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return forms[0];
+  if (m10 >= 2 && m10 <= 4 && !(m100 >= 12 && m100 <= 14)) return forms[1];
+  return forms[2];
+}
+
+export const dmy = (d: Date) =>
+  new Intl.DateTimeFormat('hr-HR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
