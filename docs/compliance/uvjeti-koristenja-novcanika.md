@@ -33,6 +33,22 @@
 - **Upravni odbor (UO)** — tijelo Udruge koje upravlja zajedničkim Safe novčanikom Udruge putem višestrukog potpisa (engl. *multisignature*).
 - **Agora** — platforma Udruge za sudjelovanje i odlučivanje članova.
 
+### Odnos entiteta
+
+```mermaid
+flowchart TB
+    K["Korisnik / Član"] -->|"posjeduje"| PK["Passkey · Face ID"]
+    PK -->|"vlasništvo"| SAFE["Safe (na Gnosisu)"]
+    SAFE -->|"drži"| EURE["EURe · Monerium e-novac"]
+    SAFE -->|"drži"| EDEUR["edEUR · potvrda rada"]
+    K -->|"članarina / donacija"| NR["Namjenski računi · projekti"]
+    EDEUR -->|"otkup"| FOND["Fond za isplate"]
+    FOND -->|"isplata EURe"| SAFE
+    UO["Upravni odbor"] -->|"multisig upravlja"| FOND
+    UO -->|"multisig upravlja"| NR
+    K -->|"sudjeluje / odlučuje"| AGORA["Platforma Agora"]
+```
+
 ---
 
 ## 3. Novčanik i samostalno upravljanje (self-custody)
@@ -44,6 +60,18 @@
 3.3. Korisnik je **sam odgovoran** za pristup svom *passkeyu*. Gubitak svih pristupnih *passkeya* može značiti trajan gubitak pristupa sredstvima. Udruga ne može vratiti izgubljeni pristup umjesto Korisnika.
 
 3.4. Sredstva (EURe) i zapisi (edEUR) nalaze se na javnoj mreži Gnosis i **javno su provjerljivi** (v. poglavlje 8).
+
+### Tko može pristupiti sredstvima
+
+```mermaid
+flowchart TB
+    PK["Passkey · Face ID / Touch ID"] -->|"jedini vlasnik"| SAFE["Korisnikov Safe"]
+    TX["Transakcija · donacija / članarina / otkup"] -->|"traži potvrdu otiskom"| PK
+    SAFE -->|"counterfactual → deploy pri 1. transakciji"| GNOSIS["Gnosis lanac"]
+    UDRUGA["Udruga / treća strana"] -.->|"NEMA pristup, ne može teretiti"| SAFE
+    classDef zabrana fill:#fdecea,stroke:#c0392b,stroke-width:2px,color:#7b241c;
+    class UDRUGA zabrana;
+```
 
 ---
 
@@ -59,6 +87,19 @@
 
 4.5. **Naplata u samostalnom novčaniku.** Budući da je Novčanik samostalan, ne postoji automatsko terećenje. Članarina se plaća: (a) unaprijed jednom potvrdom za više razdoblja, ili (b) na **podsjetnik** Udruge koji Član potvrđuje otiskom prsta. Udruga ne može teretiti Korisnikov Safe bez njegove potvrde.
 
+### Članarina — kategorije i tok
+
+```mermaid
+flowchart TB
+    C["Član"] --> KAT{"Kategorija"}
+    KAT -->|"Redovni"| R["1 € tjedno"]
+    KAT -->|"Upravni odbor"| U["3 € dnevno"]
+    R --> PP["Prepaid: jedna potvrda za N razdoblja<br/>(unatrag + unaprijed)"]
+    U --> PP
+    PP -->|"MultiSend · jedna potvrda otiskom"| NR["Namjenski računi po izboru"]
+    POD["Podsjetnik · push"] -.->|"re-up kad istekne"| C
+```
+
 ---
 
 ## 5. Donacije
@@ -68,6 +109,19 @@
 5.2. Donacije su prema zadanim postavkama **anonimne**; javno navođenje imena donatora moguće je isključivo uz izričitu privolu Člana (v. poglavlje 9).
 
 5.3. Donacije se, kao i članarina, mogu usmjeriti na namjenske račune projekata.
+
+### Tok donacije
+
+```mermaid
+flowchart TB
+    D["Donator"] -->|"jednokratno ili redovito"| DON["Donacija · EURe"]
+    DON --> NR["Namjenski računi · projekti"]
+    DON --> PRIV{"Vidljivost imena"}
+    PRIV -->|"zadano"| ANON["Anonimno"]
+    PRIV -->|"opt-in privola · GDPR"| JAVNO["Javno ime"]
+    classDef priv fill:#e6f4ea,stroke:#1e8e5a,stroke-width:2px,color:#14532d;
+    class ANON priv;
+```
 
 ---
 
@@ -105,6 +159,19 @@ flowchart LR
 7.2. **Diskrecijski karakter otkupa.** Otkup je **nagrada koja ovisi o dostupnosti sredstava u Fondu** i odlukama Udruge. edEUR **ne predstavlja zajamčeno potraživanje** na isplatu eura na zahtjev. Ova je odredba bitna za pravni status edEUR-a i ne smije se tumačiti kao obećanje isplate.
 
 7.3. **Bez prinosa.** Otkup se obavlja po nominali 1 edEUR = 1 €; ne postoji prinos ni uvećanje vrijednosti.
+
+### Tok otkupa edEUR → EURe
+
+```mermaid
+flowchart TB
+    C["Član · drži edEUR"] -->|"zahtjev za otkup"| BURN["Burn edEUR (poništenje)"]
+    BURN --> FOND{"Fond za isplate ·<br/>dostupna sredstva?"}
+    FOND -->|"Da · diskrecijski"| ISPLATA["Isplata EURe Članu"]
+    FOND -->|"Ne / čeka"| PRICEKA["Otkup čeka dostupnost<br/>(nije zajamčeni claim)"]
+    ISPLATA --> NOM["Po nominali 1 edEUR = 1 €, bez prinosa"]
+    classDef cekanje fill:#fff3e0,stroke:#f7941d,stroke-width:2px,color:#7a3e00;
+    class PRICEKA cekanje;
+```
 
 ---
 
