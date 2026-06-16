@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Onboarding } from './screens/Onboarding';
 import { Home } from './screens/Home';
 import { Doniraj } from './screens/Doniraj';
@@ -23,6 +23,7 @@ export function App() {
   const [entered, setEntered] = useState(false);
   const [screen, setScreen] = useState<Screen>('home');
   const [push, setPush] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Mock push: članarina ističe → re-up. Pojavi se kratko nakon ulaska.
   useEffect(() => {
@@ -30,6 +31,11 @@ export function App() {
     const t = setTimeout(() => setPush(true), 2500);
     return () => clearTimeout(t);
   }, [entered]);
+
+  // Scroll na vrh pri svakoj izmjeni ekrana (tab/nav).
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [screen, entered]);
 
   // Otvori app na zadanom ekranu (koristi desktop surround za navigaciju).
   const navigate = (s: Screen) => {
@@ -50,7 +56,7 @@ export function App() {
           onDismiss={() => setPush(false)}
         />
       )}
-      <div className="flex-1 overflow-y-auto">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto">
         {screen === 'home' && <Home go={setScreen} />}
         {screen === 'doniraj' && <Doniraj />}
         {screen === 'clanarina' && <Clanarina />}
@@ -63,15 +69,16 @@ export function App() {
     </>
   );
 
-  // Mobile: full-bleed (bez okvira). Desktop (md+): phone frame + poveznice okolo.
+  // Mobile: full-bleed (bez okvira). Desktop: phone frame + poveznice (xl) i tehnički opis (xl).
   return (
-    <div className="min-h-[100dvh] md:flex md:items-center md:justify-center md:gap-10 md:p-10 lg:gap-16">
+    <div className="min-h-[100dvh] md:flex md:items-center md:justify-center md:gap-8 md:p-8 xl:gap-10">
       <DesktopSurround navigate={navigate} />
       <div
         className="relative mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col overflow-hidden bg-page md:mx-0 md:h-[86vh] md:max-h-[860px] md:min-h-[620px] md:w-[392px] md:flex-none md:rounded-[2.75rem] md:border-[12px] md:border-navy md:shadow-card md:ring-1 md:ring-black/5"
       >
         {body}
       </div>
+      <DesktopDocs screen={entered ? screen : 'onboarding'} />
     </div>
   );
 }
@@ -87,7 +94,7 @@ function DesktopSurround({ navigate }: { navigate: (s: Screen) => void }) {
     { label: 'Aktivnost', s: 'aktivnost' },
   ];
   return (
-    <aside className="hidden w-full max-w-sm md:block">
+    <aside className="hidden w-full max-w-sm xl:block">
       <img src="/brand/logo-horizontal.svg" alt="e-Demokracija" className="h-7" />
       <h2 className="mt-6 text-4xl font-semibold leading-[0.98] tracking-display text-navy">
         Vaš glas.
@@ -126,6 +133,100 @@ function DesktopSurround({ navigate }: { navigate: (s: Screen) => void }) {
         Udruga e-Demokracija · OIB 70011366813
         <br />
         Remete 52, Zagreb
+      </p>
+    </aside>
+  );
+}
+
+/** Tehnički opis trenutnog ekrana + arhitektonske/compliance odluke (desktop, xl+). */
+type DocKey = Screen | 'onboarding';
+const SCREEN_DOCS: Record<DocKey, { title: string; points: string[] }> = {
+  onboarding: {
+    title: 'Onboarding · self-custody',
+    points: [
+      'Safe (pametni ugovor) na Gnosisu u vlasništvu passkeya; Udruga nema pristup sredstvima.',
+      'Bez seed-a i lozinki — WebAuthn passkey (Face ID/Touch ID), ključ u Apple/Google Keychainu.',
+      'Adresa je counterfactual (CREATE2); Safe se deploya pri prvoj transakciji (MultiSend).',
+    ],
+  },
+  home: {
+    title: 'Početna · EURe + pregled',
+    points: [
+      'EURe = Monerium token e-novca (1:1 EUR) na Gnosisu — regulirano sredstvo.',
+      'Stanje i sve transakcije čitaju se onchain; potpuna transparentnost je #1 vrijednost.',
+      'Članstvo: aktivni član 1 €/tjedno (UO 3 €/dan), Statut čl. 11.',
+      'Svaka akcija traži potvrdu otiskom — ništa se ne tereti bez korisnika.',
+    ],
+  },
+  doniraj: {
+    title: 'Doniraj · namjenski transfer',
+    points: [
+      'Donacija = EURe transfer na namjenski Safe; bez provizija i posrednika.',
+      'Anonimno po defaultu (GDPR); javno ime samo uz izričitu opt-in privolu.',
+      'Redovita donacija = ponovljeni intent koji korisnik potvrđuje otiskom (self-custody, bez auto-terećenja).',
+    ],
+  },
+  clanarina: {
+    title: 'Članarina · prepaid model',
+    points: [
+      'Recurring u self-custodyju nema auto-debita → prepaid: jedna passkey potvrda za N razdoblja (set & forget).',
+      'Kategorije: redovni 1 €/tjedno, UO 3 €/dan; podmiruje se unatrag i unaprijed u istoj transakciji.',
+      'Raspodjela na N namjenskih računa ide kao jedna MultiSend transakcija (atomično, jedna potvrda).',
+      'Push podsjetnik za re-up kad članarina ističe. Allowance/Zodiac modul odbijen — čuva self-custody.',
+    ],
+  },
+  projekti: {
+    title: 'Projekti · interni crowdfunding',
+    points: [
+      'Svaki projekt = zaseban namjenski Safe (analogno per-campaign Safeu).',
+      'Član sam usmjerava članarinu i donacije → participativni budžet zajednice.',
+      'Doprinosi javni i auditabilni na Gnosisu (raised/goal/broj članova).',
+    ],
+  },
+  nagrade: {
+    title: 'Nagrade · edEUR loyalty',
+    points: [
+      'edEUR = neprenosivi (soulbound) ERC-20; mintsa samo Udruga kao potvrdu rada, burn pri otkupu.',
+      'Bez P2P → izvan MiCA EMT / EMI okvira (loyalty / limited-network exemption).',
+      'Otkup edEUR→EURe iz fonda za isplate je diskrecijski (ne zajamčeni 1:1 claim) — granica koja ga drži izvan EMT-a.',
+      'Faza 2 (P2P): zastavicu isEMILicenseActive mijenja SAMO UO Safe multisig (M-od-N), tek uz EMI licencu — nikad pojedinac.',
+    ],
+  },
+  aktivnost: {
+    title: 'Aktivnost · javni zapisnik',
+    points: [
+      'Zapis transfera čita se onchain (getLogs) na Gnosisu — nepromjenjivo i auditabilno.',
+      'Donatori su anonimni (pseudonim) dok ne daju GDPR privolu za javno ime.',
+      'Načelo: „svaka uplata i isplata javno vidljiva članstvu".',
+    ],
+  },
+  primi: {
+    title: 'Primi · QR + SEPA',
+    points: [
+      'Primanje EURe preko QR/adrese Safea (EIP-681 format).',
+      'SEPA nadoplata: payment intent → dijeljeni backend (mpt.domovina.ai) → Monerium most banka→EURe.',
+      'Adresa je counterfactual do prvog deploya Safea.',
+    ],
+  },
+};
+
+function DesktopDocs({ screen }: { screen: DocKey }) {
+  const doc = SCREEN_DOCS[screen];
+  return (
+    <aside className="hidden w-full max-w-xs xl:block xl:max-h-[86vh] xl:overflow-y-auto">
+      <p className="eyebrow">Tehnički detalji</p>
+      <h3 className="mt-1 text-2xl font-semibold tracking-display text-navy">{doc.title}</h3>
+      <ul className="mt-4 space-y-3">
+        {doc.points.map((p, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-navy-ink">
+            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-pill bg-orange" aria-hidden />
+            <span>{p}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-6 border-t border-hairline pt-4 text-xs leading-relaxed text-muted">
+        Detalji i pravna analiza: <span className="font-semibold text-navy">docs/compliance/</span> — Uvjeti
+        korištenja + edEUR loyalty bilješka (s mermaid dijagramima).
       </p>
     </aside>
   );
