@@ -6,6 +6,7 @@ import { navigate } from '../lib/router';
 // Markdown dokumenti (single source — bundlani kao string, lazy chunk).
 import uvjetiMd from '../../docs/compliance/uvjeti-koristenja-novcanika.md?raw';
 import edeurMd from '../../docs/compliance/edeur-loyalty-token.md?raw';
+import poreziMd from '../../docs/compliance/porezi-i-transparentnost.md?raw';
 
 mermaid.initialize({
   startOnLoad: false,
@@ -34,6 +35,12 @@ const DOCS: Record<string, { slug: string; title: string; blurb: string; md: str
     title: 'edEUR — pravno-tehnička bilješka',
     blurb: 'Zašto je edEUR loyalty (bez EMI licence) i kako kroz multisig postaje regulirani token.',
     md: edeurMd,
+  },
+  porezi: {
+    slug: 'porezi',
+    title: 'Porezi i transparentnost',
+    blurb: 'Tok novca na javnom lancu i porezne točke — najprijateljskije za Poreznu upravu (uvid onchain).',
+    md: poreziMd,
   },
 };
 

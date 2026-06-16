@@ -1,5 +1,6 @@
 import { community, eur, ledger } from '../lib/mock';
 import { Card, ScreenTitle } from '../components/ui';
+import { navigate } from '../lib/router';
 
 const kindMeta: Record<string, { label: string; sign: string; color: string }> = {
   donacija: { label: 'Donacija', sign: '+', color: 'text-navy' },
@@ -58,6 +59,12 @@ export function Aktivnost() {
         <p className="mt-3 px-1 text-center text-xs text-muted">
           Zapis na Gnosis lancu · auditabilno i nepromjenjivo
         </p>
+        <button
+          onClick={() => navigate('/dokumenti/porezi')}
+          className="mt-3 w-full rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+        >
+          📄 Kako se vide porezi onchain →
+        </button>
       </div>
     </div>
   );
