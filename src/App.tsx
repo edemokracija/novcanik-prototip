@@ -31,6 +31,12 @@ export function App() {
     return () => clearTimeout(t);
   }, [entered]);
 
+  // Otvori app na zadanom ekranu (koristi desktop surround za navigaciju).
+  const navigate = (s: Screen) => {
+    setEntered(true);
+    setScreen(s);
+  };
+
   const body = !entered ? (
     <Onboarding onEnter={() => setEntered(true)} />
   ) : (
@@ -57,11 +63,71 @@ export function App() {
     </>
   );
 
-  // Full-bleed: app puni cijeli viewport kao prava mobilna aplikacija.
+  // Mobile: full-bleed (bez okvira). Desktop (md+): phone frame + poveznice okolo.
   return (
-    <div className="flex h-[100dvh] justify-center overflow-hidden">
-      <div className="relative flex h-full w-full max-w-[480px] flex-col overflow-hidden bg-page">{body}</div>
+    <div className="min-h-[100dvh] md:flex md:items-center md:justify-center md:gap-10 md:p-10 lg:gap-16">
+      <DesktopSurround navigate={navigate} />
+      <div
+        className="relative mx-auto flex h-[100dvh] w-full max-w-[480px] flex-col overflow-hidden bg-page md:mx-0 md:h-[86vh] md:max-h-[860px] md:min-h-[620px] md:w-[392px] md:flex-none md:rounded-[2.75rem] md:border-[12px] md:border-navy md:shadow-card md:ring-1 md:ring-black/5"
+      >
+        {body}
+      </div>
     </div>
+  );
+}
+
+/** Desktop okvir: wordmark, tagline i poveznice oko phone framea. Skriveno na mobitelu. */
+function DesktopSurround({ navigate }: { navigate: (s: Screen) => void }) {
+  const navLinks: { label: string; s: Screen }[] = [
+    { label: 'Početna', s: 'home' },
+    { label: 'Članarina', s: 'clanarina' },
+    { label: 'Projekti', s: 'projekti' },
+    { label: 'Nagrade · edEUR', s: 'nagrade' },
+    { label: 'Doniraj', s: 'doniraj' },
+    { label: 'Aktivnost', s: 'aktivnost' },
+  ];
+  return (
+    <aside className="hidden w-full max-w-sm md:block">
+      <img src="/brand/logo-horizontal.svg" alt="e-Demokracija" className="h-7" />
+      <h2 className="mt-6 text-4xl font-semibold leading-[0.98] tracking-display text-navy">
+        Vaš glas.
+        <br />
+        Vaša odluka.
+      </h2>
+      <p className="mt-4 text-sm leading-relaxed text-muted">
+        Novčanik zajednice — self-custody EURe za donacije i članarine, namjenski računi i edEUR nagrade za rad.
+        Ovo je interaktivni prototip.
+      </p>
+
+      <p className="mt-8 eyebrow">Otvori ekran</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {navLinks.map((l) => (
+          <button
+            key={l.s}
+            onClick={() => navigate(l.s)}
+            className="rounded-pill border border-chipline bg-surface px-3 py-1.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+          >
+            {l.label}
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-8 eyebrow">Poveznice</p>
+      <div className="mt-2 flex flex-col gap-1.5 text-sm">
+        <a href="https://www.e-demokracija.hr" target="_blank" rel="noreferrer" className="text-navy-mid transition hover:text-orange">
+          www.e-demokracija.hr ↗
+        </a>
+        <a href="mailto:info@e-demokracija.hr" className="text-navy-mid transition hover:text-orange">
+          info@e-demokracija.hr
+        </a>
+      </div>
+
+      <p className="mt-8 text-xs leading-relaxed text-muted">
+        Udruga e-Demokracija · OIB 70011366813
+        <br />
+        Remete 52, Zagreb
+      </p>
+    </aside>
   );
 }
 
