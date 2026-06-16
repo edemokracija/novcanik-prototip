@@ -41,6 +41,16 @@ export function FeedbackWidget({ screen, screenLabel }: { screen: string; screen
     }
   }, [open, screenLabel]);
 
+  // Draft se sprema po ekranu (localStorage) da se ne izgubi pri navigaciji/zatvaranju.
+  const draftKey = 'edw_fb_draft_' + screen;
+  useEffect(() => {
+    setComment(localStorage.getItem('edw_fb_draft_' + screen) || '');
+  }, [screen]);
+  const onComment = (v: string) => {
+    setComment(v);
+    localStorage.setItem(draftKey, v);
+  };
+
   const thread = all.filter((c) => c.screen === screen).sort((a, b) => a.ts - b.ts);
   const isOther = name === '__other__';
   const finalName = (isOther ? otherName : name).trim();
@@ -56,6 +66,7 @@ export function FeedbackWidget({ screen, screenLabel }: { screen: string; screen
       });
       if (!res.ok) throw new Error('http ' + res.status);
       localStorage.setItem(NAME_KEY, isOther ? '__other__' : name);
+      localStorage.removeItem(draftKey);
       setComment('');
       setState('ok');
       load();
@@ -89,6 +100,9 @@ export function FeedbackWidget({ screen, screenLabel }: { screen: string; screen
                 <div>
                   <p className="eyebrow">Thread · {screenLabel}</p>
                   <h3 className="mt-1 text-lg font-semibold text-navy">Komentari na ovom ekranu</h3>
+                  <button onClick={() => navigate('/feedback')} className="mt-1 text-xs font-semibold text-navy-mid hover:text-orange">
+                    Pregled svih komentara (svi ekrani) →
+                  </button>
                 </div>
                 <button onClick={() => setOpen(false)} aria-label="Zatvori" className="grid h-8 w-8 place-items-center rounded-pill text-muted hover:bg-navy/5">✕</button>
               </div>
@@ -141,25 +155,23 @@ export function FeedbackWidget({ screen, screenLabel }: { screen: string; screen
                 )}
                 <textarea
                   value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  rows={2}
-                  placeholder={`Komentar na "${screenLabel}"…`}
-                  className="mt-2 w-full resize-none rounded-2xl border border-chipline bg-page px-3 py-2 text-sm text-navy-ink outline-none focus:border-navy/40"
+                  onChange={(e) => onComment(e.target.value)}
+                  rows={5}
+                  placeholder={`Komentar na "${screenLabel}"… (slobodno dulje — skica se sprema automatski)`}
+                  className="mt-2 min-h-[8rem] w-full resize-y rounded-2xl border border-chipline bg-page px-3 py-2.5 text-sm leading-relaxed text-navy-ink outline-none focus:border-navy/40"
                 />
-                {state === 'err' && <p className="mt-1 text-xs font-semibold text-red-600">Greška — pokušaj ponovno.</p>}
-                {state === 'ok' && <p className="mt-1 text-xs font-semibold text-green-600">✓ Spremljeno</p>}
-                <div className="mt-2 flex items-center gap-2">
-                  <button
-                    onClick={submit}
-                    disabled={!finalName || !comment.trim() || state === 'slanje'}
-                    className="flex-1 rounded-pill bg-orange py-2.5 text-sm font-semibold text-white transition hover:brightness-95 disabled:opacity-50"
-                  >
-                    {state === 'slanje' ? 'Šaljem…' : 'Pošalji'}
-                  </button>
-                  <button onClick={() => navigate('/feedback')} className="rounded-pill bg-chip px-4 py-2.5 text-sm font-semibold text-navy">
-                    Svi
-                  </button>
+                <div className="mt-1 flex items-center justify-between">
+                  <span className="text-xs text-muted">{comment.trim() ? 'Skica se sprema automatski' : ''}</span>
+                  {state === 'err' && <span className="text-xs font-semibold text-red-600">Greška — pokušaj ponovno.</span>}
+                  {state === 'ok' && <span className="text-xs font-semibold text-green-600">✓ Spremljeno</span>}
                 </div>
+                <button
+                  onClick={submit}
+                  disabled={!finalName || !comment.trim() || state === 'slanje'}
+                  className="mt-2 w-full rounded-pill bg-orange py-3 text-sm font-semibold text-white transition hover:brightness-95 disabled:opacity-50"
+                >
+                  {state === 'slanje' ? 'Šaljem…' : 'Pošalji komentar'}
+                </button>
               </div>
             </div>
           </div>,
