@@ -51,14 +51,33 @@ function splitDoc(md: string): { type: 'md' | 'mermaid'; content: string }[] {
   return parts;
 }
 
+/** Desktop (md+) = horizontalni dijagrami (LR), mobitel = vertikalni (TB). */
+function useIsDesktop() {
+  const [d, setD] = useState(() => window.matchMedia('(min-width: 768px)').matches);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const on = () => setD(mq.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  return d;
+}
+
+/** Prepiše SAMO smjer na vrhu dijagrama (flowchart/graph); subgraph `direction` ostaje. */
+function withDirection(code: string, dir: 'LR' | 'TB') {
+  return code.replace(/\b(flowchart|graph)\s+(TB|TD|BT|RL|LR)/, `$1 ${dir}`);
+}
+
 function Diagram({ code }: { code: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [err, setErr] = useState<string | null>(null);
+  const isDesktop = useIsDesktop();
+  const dir = isDesktop ? 'LR' : 'TB';
   useEffect(() => {
     let alive = true;
     const id = 'mm-' + Math.random().toString(36).slice(2);
     mermaid
-      .render(id, code)
+      .render(id, withDirection(code, dir))
       .then(({ svg }) => {
         if (alive && ref.current) ref.current.innerHTML = svg;
       })
@@ -66,7 +85,7 @@ function Diagram({ code }: { code: string }) {
     return () => {
       alive = false;
     };
-  }, [code]);
+  }, [code, dir]);
   if (err) return <pre className="doc-mermaid-err">{code}</pre>;
   return <div className="doc-diagram" ref={ref} aria-label="dijagram" />;
 }
@@ -88,7 +107,7 @@ function Article({ md }: { md: string }) {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-[100dvh]">
+    <div className="min-h-[100dvh] overflow-x-clip">
       <header className="sticky top-0 z-10 border-b border-hairline bg-page/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
           <button onClick={() => navigate('/')} className="flex items-center gap-2">
