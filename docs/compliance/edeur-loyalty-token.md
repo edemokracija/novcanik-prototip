@@ -29,6 +29,16 @@ Arhitektura je namjerno pripremljena za **Fazu 2**: jednom kad (i ako) udruga is
 | **Vrijednost** | Fiksno 1 `edEUR` = 1 € obračunske vrijednosti. Nema sekundarnog tržišta, ne kotira na mjenjačnicama, ne može narasti iznad nominale. |
 | **Sekundarno tržište** | Ne postoji. Nema burze, nema P2P, nema špekulacije. |
 
+### Zatvoreni krug — dopušteni i zabranjeni tokovi
+
+```mermaid
+flowchart LR
+    UO["Udruga · UO Safe"] -->|"mint: nagrada za rad"| M["Član (edEUR)"]
+    M -->|"burn: otkup -> EURe iz Fonda"| UO
+    M -.->|"P2P prijenos<br/>ZABRANJENO (revert u ugovoru)"| M2["Drugi član"]
+    M -.->|"prodaja / burza / mjenjačnica<br/>ZABRANJENO (nema tržišta)"| EX["Tržište"]
+```
+
 ---
 
 ## 3. Zašto edEUR (Faza 1) NIJE elektronički novac
@@ -110,6 +120,22 @@ bool public isEMILicenseActive = false; // Faza 1: P2P blokiran
 - **Faza 2 (`true`):** tek **nakon** ishođenja EMI licence (ili partnerstva s licenciranim izdavateljem e-novca) flag se prebacuje; P2P se otključava i `edEUR` postaje regulirani token vezan uz euro.
 
 **Važno:** sam flag **ne stvara** pravo na P2P — pravni temelj je licenca/partnerstvo. Flag je samo tehnička poluga koja se aktivira **kad i ako** pravni preduvjeti budu ispunjeni. Prebacivanje flaga bez licence ne bi bilo usklađeno.
+
+**Tko može prebaciti zastavicu (decentralizacija):** nijedan pojedinac. Zastavicu mijenja isključivo Upravni odbor kroz Safe s višestrukim potpisom (prag M-od-N), i to tek nakon ispunjenja pravnog preduvjeta.
+
+```mermaid
+flowchart TD
+    F1["Faza 1 · DANAS<br/>isEMILicenseActive = false<br/>P2P blokiran -> loyalty bez licence"]
+    GATE{"Pravni preduvjet:<br/>EMI licenca ili partnerstvo?"}
+    MS["UO Safe · prag M-od-N potpisa"]
+    F2["Faza 2 · VIZIJA<br/>isEMILicenseActive = true<br/>P2P otključan -> regulirani token"]
+    F1 --> GATE
+    GATE -->|"Ne"| F1
+    GATE -->|"Da"| MS
+    MS -->|"dosegnut prag potpisa"| F2
+    MS -.->|"pojedinac sam / centralizirano"| BLK["Nemoguće"]
+    BLK --> F1
+```
 
 ---
 
