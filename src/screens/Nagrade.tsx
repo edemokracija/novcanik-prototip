@@ -29,6 +29,27 @@ export function Nagrade() {
           <p className="mt-1 text-sm text-white/65">≈ {eur(loyalty.balance)} vrijednosti</p>
         </Card>
 
+        {/* Indikator faze + governance */}
+        <Card className="p-4">
+          <div className="flex items-center justify-between gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-pill border border-chipline bg-chip px-3 py-1 text-xs font-semibold text-navy">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="11" width="16" height="9" rx="2" />
+                <path d="M8 11V7a4 4 0 018 0v4" />
+              </svg>
+              Faza 1 · P2P zaključan
+            </span>
+            <span className="text-xs text-muted">Faza 2 · zaključano</span>
+          </div>
+          <div className="mt-3 flex items-center gap-1.5">
+            <span className="h-1.5 flex-1 rounded-pill bg-orange" />
+            <span className="h-1.5 flex-1 rounded-pill bg-chipline" />
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-muted">
+            Otključavanje P2P (Faza 2) mijenja <span className="font-semibold text-navy">samo Upravni odbor kroz Safe multisig</span> (M-od-N potpisa) — nikad pojedinac, i tek uz EMI licencu.
+          </p>
+        </Card>
+
         {/* Zamjena edEUR → EURe */}
         <Card className="p-5">
           <div className="flex items-center justify-between">
