@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { edeur, eur, loyalty } from '../lib/mock';
 import { Button, Card, FeatureRow, ScreenTitle } from '../components/ui';
 import { PaymentConfirm } from '../components/PaymentConfirm';
+import { navigate } from '../lib/router';
 
 export function Nagrade() {
   const max = Math.min(loyalty.balance, loyalty.fundAvailable);
@@ -98,6 +99,12 @@ export function Nagrade() {
             <FeatureRow>Nije prenosiv drugima (nema P2P razmjene) — vezan je uz tebe</FeatureRow>
             <FeatureRow>Iz fonda za isplate zamjenjuje se za EURe, ovisno o dostupnosti</FeatureRow>
           </ul>
+          <button
+            onClick={() => navigate('/dokumenti/edeur')}
+            className="mt-4 w-full rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+          >
+            📄 Pročitaj pravno-tehničku bilješku →
+          </button>
         </Card>
       </div>
 

@@ -1,4 +1,5 @@
 import { Button, Eyebrow, FeatureRow, Fingerprint } from '../components/ui';
+import { navigate } from '../lib/router';
 
 export function Onboarding({ onEnter }: { onEnter: () => void }) {
   return (
@@ -35,6 +36,12 @@ export function Onboarding({ onEnter }: { onEnter: () => void }) {
         <Button full onClick={onEnter}>
           Otvori novčanik
         </Button>
+        <button
+          onClick={() => navigate('/dokumenti')}
+          className="w-full text-center text-sm font-semibold text-navy-mid transition hover:text-orange"
+        >
+          Kako novčanik radi · dokumenti i dijagrami →
+        </button>
         <p className="text-center text-xs leading-relaxed text-muted">
           Identitet čuva Face ID i Apple Keychain.
           <br />

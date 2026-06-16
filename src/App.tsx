@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Onboarding } from './screens/Onboarding';
 import { Home } from './screens/Home';
 import { Doniraj } from './screens/Doniraj';
@@ -8,6 +8,9 @@ import { Primi } from './screens/Primi';
 import { Projekti } from './screens/Projekti';
 import { Nagrade } from './screens/Nagrade';
 import { PushReminder } from './components/PushReminder';
+import { navigate as goTo } from './lib/router';
+
+const DocsPage = lazy(() => import('./docs/DocsPage'));
 
 export type Screen = 'home' | 'doniraj' | 'clanarina' | 'projekti' | 'nagrade' | 'aktivnost' | 'primi';
 
@@ -23,7 +26,15 @@ export function App() {
   const [entered, setEntered] = useState(false);
   const [screen, setScreen] = useState<Screen>('home');
   const [push, setPush] = useState(false);
+  const [path, setPath] = useState(() => window.location.pathname);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Klijentska ruta: /dokumenti/... renderira DocsPage (izvan phone framea).
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   // Mock push: članarina ističe → re-up. Pojavi se kratko nakon ulaska.
   useEffect(() => {
@@ -36,6 +47,15 @@ export function App() {
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 });
   }, [screen, entered]);
+
+  // Ruta dokumentacije — renderira se preko cijelog ekrana (ne u phone frameu).
+  if (path.startsWith('/dokumenti')) {
+    return (
+      <Suspense fallback={<div className="grid h-[100dvh] place-items-center text-muted">Učitavanje…</div>}>
+        <DocsPage path={path} />
+      </Suspense>
+    );
+  }
 
   // Otvori app na zadanom ekranu (koristi desktop surround za navigaciju).
   const navigate = (s: Screen) => {
@@ -128,6 +148,13 @@ function DesktopSurround({ navigate }: { navigate: (s: Screen) => void }) {
           info@e-demokracija.hr
         </a>
       </div>
+
+      <button
+        onClick={() => goTo('/dokumenti')}
+        className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-mid transition hover:text-orange"
+      >
+        📄 Kako radi · dokumenti i dijagrami →
+      </button>
 
       <p className="mt-8 text-xs leading-relaxed text-muted">
         Udruga e-Demokracija · OIB 70011366813
@@ -224,9 +251,14 @@ function DesktopDocs({ screen }: { screen: DocKey }) {
           </li>
         ))}
       </ul>
-      <p className="mt-6 border-t border-hairline pt-4 text-xs leading-relaxed text-muted">
-        Detalji i pravna analiza: <span className="font-semibold text-navy">docs/compliance/</span> — Uvjeti
-        korištenja + edEUR loyalty bilješka (s mermaid dijagramima).
+      <button
+        onClick={() => goTo('/dokumenti')}
+        className="mt-6 w-full rounded-pill border border-chipline bg-surface px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+      >
+        📄 Otvori dokumente + dijagrame →
+      </button>
+      <p className="mt-3 text-xs leading-relaxed text-muted">
+        Uvjeti korištenja + edEUR pravno-tehnička bilješka, s renderiranim mermaid dijagramima.
       </p>
     </aside>
   );
