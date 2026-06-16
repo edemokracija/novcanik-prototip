@@ -1,7 +1,7 @@
 // Feedback članova UO — boje po osobi + dohvat komentara.
 export type Comment = { id: string; name: string; screen: string; where?: string; comment: string; ts: number };
 
-export const MEMBERS = ['Robert', 'Saša', 'Tomo', 'Kruno'];
+export const MEMBERS = ['Robert', 'Saša', 'Tomo', 'Kruno', 'Matija'];
 
 export type FbColor = { accent: string; tint: string };
 
@@ -11,6 +11,7 @@ const PALETTE: Record<string, FbColor> = {
   'Saša': { accent: '#16a34a', tint: 'rgba(22,163,74,0.10)' }, // zelena
   Tomo: { accent: '#7c3aed', tint: 'rgba(124,58,237,0.10)' }, // ljubičasta
   Kruno: { accent: '#db2777', tint: 'rgba(219,39,127,0.10)' }, // magenta
+  Matija: { accent: '#173863', tint: 'rgba(23,56,99,0.10)' }, // navy (voditelj / odgovori)
 };
 const DEFAULT: FbColor = { accent: '#64748b', tint: 'rgba(100,116,139,0.10)' };
 
