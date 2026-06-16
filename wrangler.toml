@@ -1,0 +1,10 @@
+name = "edemokracija-novcanik"
+compatibility_date = "2026-05-01"
+pages_build_output_dir = "dist"
+# CF account_id NIJE podržan u Pages wrangler.toml — postavi CLOUDFLARE_ACCOUNT_ID env
+# (account: D.O.M. = 7dc7167b7e2e00923bfa7cd697df14e4)
+
+# Feedback prototipa (komentari članova UO) — Pages Function /api/feedback
+[[kv_namespaces]]
+binding = "FEEDBACK_KV"
+id = "ad7201612d6440adaf2a72b49d871da5"

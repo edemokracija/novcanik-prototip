@@ -9,8 +9,11 @@ import { Projekti } from './screens/Projekti';
 import { Nagrade } from './screens/Nagrade';
 import { PushReminder } from './components/PushReminder';
 import { navigate as goTo } from './lib/router';
+import { FeedbackWidget } from './components/FeedbackWidget';
+import { SCREEN_LABELS } from './lib/screens';
 
 const DocsPage = lazy(() => import('./docs/DocsPage'));
+const FeedbackList = lazy(() => import('./feedback/FeedbackList'));
 
 export type Screen = 'home' | 'doniraj' | 'clanarina' | 'projekti' | 'nagrade' | 'aktivnost' | 'primi';
 
@@ -57,6 +60,15 @@ export function App() {
     );
   }
 
+  // Pregled feedbacka članova UO.
+  if (path.startsWith('/feedback')) {
+    return (
+      <Suspense fallback={<div className="grid h-[100dvh] place-items-center text-muted">Učitavanje…</div>}>
+        <FeedbackList />
+      </Suspense>
+    );
+  }
+
   // Otvori app na zadanom ekranu (koristi desktop surround za navigaciju).
   const navigate = (s: Screen) => {
     setEntered(true);
@@ -86,6 +98,7 @@ export function App() {
         {screen === 'primi' && <Primi />}
       </div>
       <TabBar screen={screen} go={setScreen} />
+      <FeedbackWidget screen={screen} screenLabel={SCREEN_LABELS[screen] ?? screen} />
     </>
   );
 
