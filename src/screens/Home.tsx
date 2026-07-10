@@ -1,5 +1,6 @@
-import { account, community, edeur, eur, kindLabel, ledger, loyalty } from '../lib/mock';
+import { account, community, edeur, eur, kindLabel, ledger, loyalty, polls } from '../lib/mock';
 import { Amount, Button, Card, Chip, Fingerprint } from '../components/ui';
+import { Vote } from '../components/icons';
 import type { Screen } from '../App';
 
 export function Home({ go }: { go: (s: Screen) => void }) {
@@ -60,6 +61,22 @@ export function Home({ go }: { go: (s: Screen) => void }) {
           Kao aktivni član imaš pun uvid u rad udruge i pravo predlaganja sadržaja na platformi Agora.
         </p>
       </Card>
+
+      {/* Glasovanje — aktivne odluke zajednice */}
+      <button onClick={() => go('glasovanje')} className="w-full text-left">
+        <Card className="flex items-center justify-between p-5">
+          <div>
+            <p className="eyebrow">Vaš glas. Vaša odluka.</p>
+            <p className="mt-1 text-lg font-semibold text-navy">
+              {polls.length} aktivne odluke
+            </p>
+            <p className="mt-0.5 text-sm text-muted">1 osoba = 1 glas · glasaj otiskom →</p>
+          </div>
+          <span className="grid h-11 w-11 place-items-center rounded-pill bg-orange/10 text-orange">
+            <Vote size={22} strokeWidth={2} aria-hidden />
+          </span>
+        </Card>
+      </button>
 
       {/* edEUR loyalty — nagrada za rad */}
       <button onClick={() => go('nagrade')} className="w-full text-left">

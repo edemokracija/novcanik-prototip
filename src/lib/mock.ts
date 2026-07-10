@@ -197,5 +197,61 @@ export const loyalty = {
 };
 export const edeur = (n: number) => `${n} edEUR`;
 
+// ── Glasovanje: 1 osoba = 1 glas (anti-sybil: passkey + članstvo) ───────────
+// Teme apolitične — interne članske odluke i participativni budžet. Formalne
+// odluke donose Skupština i UO; ovo je savjetodavni signal članstva.
+// ⚠️ Pitanja i glasovi su ILUSTRATIVNI demo (volumeni ~137 aktivnih članova).
+export type PollOption = { id: string; label: string; votes: number };
+export type Poll = {
+  id: string;
+  category: string; // slobodan label kategorije/teme odluke
+  question: string;
+  closesIn: string;
+  totalVotes: number;
+  membersOnly?: boolean; // glas gejtan na članstvo (jača anti-sybil)
+  myVote?: string; // id opcije za koju je korisnik već glasao
+  options: PollOption[];
+};
+export const polls: Poll[] = [
+  {
+    id: 'p-1',
+    category: 'Participativni budžet',
+    question: 'Koji namjenski račun ima prioritet u 2027. godini?',
+    closesIn: 'završava za 3 dana',
+    totalVotes: 133,
+    membersOnly: true,
+    options: [
+      { id: 'a', label: 'Platforma Agora — infrastruktura', votes: 61 },
+      { id: 'b', label: 'Pravna analiza referenduma', votes: 44 },
+      { id: 'c', label: 'Edukacija građana — radionice', votes: 28 },
+    ],
+  },
+  {
+    id: 'p-2',
+    category: 'Termin skupštine',
+    question: 'Kada održati godišnju skupštinu udruge?',
+    closesIn: 'završava za 6 dana',
+    totalVotes: 111,
+    myVote: 'b',
+    options: [
+      { id: 'a', label: 'Petak navečer', votes: 38 },
+      { id: 'b', label: 'Subota prijepodne', votes: 52 },
+      { id: 'c', label: 'Nedjelja popodne', votes: 21 },
+    ],
+  },
+  {
+    id: 'p-3',
+    category: 'Edukacija',
+    question: 'Koja tema sljedeće javne tribine?',
+    closesIn: 'završava za 9 dana',
+    totalVotes: 119,
+    options: [
+      { id: 'x', label: 'Digitalni identitet građana', votes: 47 },
+      { id: 'y', label: 'Participativni budžet u gradovima', votes: 39 },
+      { id: 'z', label: 'Referendumska inicijativa — kako radi', votes: 33 },
+    ],
+  },
+];
+
 export const dmy = (d: Date) =>
   new Intl.DateTimeFormat('hr-HR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
