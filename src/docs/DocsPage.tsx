@@ -7,6 +7,7 @@ import { navigate } from '../lib/router';
 import uvjetiMd from '../../docs/compliance/uvjeti-koristenja-novcanika.md?raw';
 import edeurMd from '../../docs/compliance/edeur-loyalty-token.md?raw';
 import poreziMd from '../../docs/compliance/porezi-i-transparentnost.md?raw';
+import isplativostMd from '../../docs/compliance/isplativost-novcanika.md?raw';
 
 mermaid.initialize({
   startOnLoad: false,
@@ -41,6 +42,12 @@ const DOCS: Record<string, { slug: string; title: string; blurb: string; md: str
     title: 'Porezi i transparentnost',
     blurb: 'Tok novca na javnom lancu i porezne točke — najprijateljskije za Poreznu upravu (uvid onchain).',
     md: poreziMd,
+  },
+  isplativost: {
+    slug: 'isplativost',
+    title: 'Isplativost — novčanik vs. ostali kanali',
+    blurb: 'Zašto mikrouplate (članarina 1 €/tjedno!) imaju smisla samo onchain — usporedba s karticom, IBAN-om i SMS-om.',
+    md: isplativostMd,
   },
 };
 
