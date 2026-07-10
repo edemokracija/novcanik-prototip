@@ -73,6 +73,22 @@ su **lazy chunk** (glavni bundle ostaje malen). Boje u dijagramima: 🟩 porez s
 5. **Hrvatska množina:** koristi `plural(n, [one, few, many])` iz `mock.ts` (tjedan/tjedna/tjedana).
 6. **iOS PWA:** `apple-mobile-web-app-capable` + `apple-touch-icon` + manifest; instalacija samo iz Safarija.
 
+## Backport iz loze (07-10)
+
+Repo je „sjeme" loze novčanika (`domovinatv/novcanik-template/LOZA-NOVCANIKA.md`); 07-10
+backportani primitivi mlađih grana po receptu `BACKPORT-FLOW.md` (plan: `docs/BACKPORT-PLAN.md`):
+
+- **Lucide ikone** (`src/components/icons.tsx`, currentColor) umjesto emojija — template `90f45da`.
+- **PWA splash + OG slika**: `scripts/gen_splash.py` (rsvg-convert + PIL) — orange otisak na navy
+  `#173863`; 12 iOS dimenzija + `og-image.png` 1200×630. Regeneriraj skriptom, ne ručno.
+- **OG/Twitter tagovi** statični u `index.html` (single-tenant, bez edge middlewarea) — ss `4041691`.
+- **Dokument isplativosti** `docs/compliance/isplativost-novcanika.md` (`/dokumenti/isplativost`) —
+  killer-argument: tjedna članarina 1 € vs fiksni bankovni nalog 0,25–0,40 € — zef `65629ef`.
+- **Kampanja zajednice + fee-usporedba** na Doniraj (mock `solidarity`, `cardFee`) — zef `2042382`;
+  kampanja veže postojeći projekt Agora, iznosi ILUSTRATIVNI (označeni u mock.ts).
+- **Glasovanje** (`src/screens/Glasovanje.tsx`) — template `8970e19`; ima TAB (slogan!), Primi je
+  premješten u Home quick-akcije + desktop nav. 1 osoba = 1 glas, edEUR soulbound nagrada.
+
 ## Konvencije
 
 - Sve UI kopije na hrvatskom; iznosi `Intl.NumberFormat('hr-HR', EUR)`.
