@@ -1,6 +1,7 @@
 import { community, eur, ledger } from '../lib/mock';
 import { Card, ScreenTitle } from '../components/ui';
 import { navigate } from '../lib/router';
+import { FileText } from '../components/icons';
 
 const kindMeta: Record<string, { label: string; sign: string; color: string }> = {
   donacija: { label: 'Donacija', sign: '+', color: 'text-navy' },
@@ -61,9 +62,9 @@ export function Aktivnost() {
         </p>
         <button
           onClick={() => navigate('/dokumenti/porezi')}
-          className="mt-3 w-full rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+          className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
         >
-          📄 Kako se vide porezi onchain →
+          <FileText size={15} strokeWidth={2} aria-hidden /> Kako se vide porezi onchain →
         </button>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { PushReminder } from './components/PushReminder';
 import { navigate as goTo } from './lib/router';
 import { FeedbackWidget } from './components/FeedbackWidget';
 import { SCREEN_LABELS } from './lib/screens';
+import { FileText } from './components/icons';
 
 const DocsPage = lazy(() => import('./docs/DocsPage'));
 const FeedbackList = lazy(() => import('./feedback/FeedbackList'));
@@ -166,7 +167,7 @@ function DesktopSurround({ navigate }: { navigate: (s: Screen) => void }) {
         onClick={() => goTo('/dokumenti')}
         className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-mid transition hover:text-orange"
       >
-        📄 Kako radi · dokumenti i dijagrami →
+        <FileText size={15} strokeWidth={2} aria-hidden /> Kako radi · dokumenti i dijagrami →
       </button>
 
       <p className="mt-8 text-xs leading-relaxed text-muted">
@@ -266,9 +267,9 @@ function DesktopDocs({ screen }: { screen: DocKey }) {
       </ul>
       <button
         onClick={() => goTo('/dokumenti')}
-        className="mt-6 w-full rounded-pill border border-chipline bg-surface px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+        className="mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-pill border border-chipline bg-surface px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
       >
-        📄 Otvori dokumente + dijagrame →
+        <FileText size={15} strokeWidth={2} aria-hidden /> Otvori dokumente + dijagrame →
       </button>
       <p className="mt-3 text-xs leading-relaxed text-muted">
         Uvjeti korištenja + edEUR pravno-tehnička bilješka, s renderiranim mermaid dijagramima.

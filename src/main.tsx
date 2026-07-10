@@ -22,6 +22,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </React.StrictMode>,
 );
 
+// Ukloni inline iOS splash (index.html) čim je React montiran.
+document.getElementById('ios-splash')?.remove();
+
 // Registriraj service worker (PWA instalabilnost + offline app-shell).
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

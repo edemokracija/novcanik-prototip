@@ -3,6 +3,7 @@ import { edeur, eur, loyalty } from '../lib/mock';
 import { Button, Card, FeatureRow, ScreenTitle } from '../components/ui';
 import { PaymentConfirm } from '../components/PaymentConfirm';
 import { navigate } from '../lib/router';
+import { FileText } from '../components/icons';
 
 export function Nagrade() {
   const max = Math.min(loyalty.balance, loyalty.fundAvailable);
@@ -101,9 +102,9 @@ export function Nagrade() {
           </ul>
           <button
             onClick={() => navigate('/dokumenti/edeur')}
-            className="mt-4 w-full rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
+            className="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-pill border border-chipline bg-chip py-2.5 text-sm font-semibold text-navy transition hover:border-orange hover:text-orange"
           >
-            📄 Pročitaj pravno-tehničku bilješku →
+            <FileText size={15} strokeWidth={2} aria-hidden /> Pročitaj pravno-tehničku bilješku →
           </button>
         </Card>
       </div>

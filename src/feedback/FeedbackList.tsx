@@ -69,7 +69,7 @@ export default function FeedbackList() {
         {!items && !err && <p className="mt-6 text-muted">Učitavanje…</p>}
         {items && items.length === 0 && (
           <div className="mt-6 rounded-card border border-chipline bg-surface p-6 text-center text-muted">
-            Još nema komentara. Otvori prototip, klikni <span className="font-semibold text-navy">💬 Komentari</span> na bilo kojem ekranu.
+            Još nema komentara. Otvori prototip, klikni <span className="font-semibold text-navy">Komentari</span> na bilo kojem ekranu.
           </div>
         )}
 
