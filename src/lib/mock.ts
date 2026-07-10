@@ -51,6 +51,36 @@ export const community = {
 
 export const donationPresets = [10, 30, 50];
 
+// ── Solidarna kampanja: Platforma Agora ─────────────────────────────────────
+// Kampanja veže postojeći namjenski račun „Platforma Agora" (isti Safe kao u
+// `projects`). ⚠️ Cilj, prikupljeni iznos i broj donatora su ILUSTRATIVNI demo —
+// pokazuju KAKO bi javna kampanja s brojačem prema cilju izgledala.
+export const solidarity = {
+  active: true,
+  eyebrow: 'Kampanja zajednice',
+  title: 'Platforma Agora — infrastruktura sudjelovanja',
+  story:
+    'Agora je javna digitalna infrastruktura sudjelovanja građana — prijedlozi, rasprave i glasovanja na jednom mjestu. Svaki doprinos ide izravno na namjenski račun projekta; svaka uplata javno je vidljiva. Sredstva prikupljena iznad cilja prelijevaju se u Opći fond udruge.',
+  goal: 5000, // € — ILUSTRATIVNO (usklađeno s projects.agora)
+  raised: 3220, // € — ILUSTRATIVNO (demo)
+  donors: 88, // ILUSTRATIVNO (demo)
+  surplusNote: 'Višak iznad cilja → Opći fond udruge',
+  address: '0xA90r…7C4', // isti namjenski Safe kao projekt Agora (prikaz)
+};
+
+// Presets prilagođeni mikrodonacijama — cijeli iznos stiže bez provizije,
+// pa i mali doprinos (5 €) ima smisla, za razliku od kartičnog plaćanja.
+export const solidarityPresets = [5, 10, 25, 50];
+
+// ── Kartična naknada (usporedba) ─────────────────────────────────────────────
+// Stripe EEA domaća kartica: 1,5% + 0,25 € fiksno (činjenično, 2026). Fiksni dio
+// „pojede" mikrouplate (na 5 € to je 6,5%, na 1 € tjedne članarine čak 27%) —
+// ključni razlog zašto on-chain EURe transfer (gas ~0,001 €) pobjeđuje za male iznose.
+export const CARD_FEE_PCT = 0.015;
+export const CARD_FEE_FIXED = 0.25;
+/** Procijenjena kartična naknada za dani iznos (Stripe EEA: 1,5% + 0,25 €). */
+export const cardFee = (n: number) => n * CARD_FEE_PCT + CARD_FEE_FIXED;
+
 // ── Članarina: dvije kategorije ────────────────────────────────────────────
 // Redovni član: 1 €/tjedno. Član upravnog odbora (UO): 3 €/dan.
 // `owed` = nepodmirena razdoblja unatrag (mock).
