@@ -99,10 +99,23 @@ a{color:var(--navy-mid)}
 .fp{width:120px;height:120px;margin-bottom:1.2rem}
 @media(max-width:900px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 90px;font-size:.8rem}.deck{scroll-snap-type:y proximity}.slide{padding-top:64px}}
 @media print{
+  @page{size:13.333in 7.5in;margin:0}
+  html,body{background:var(--page)}
   .deck{height:auto;overflow:visible;scroll-snap-type:none}
-  .slide{min-height:auto;page-break-after:always;break-after:page;padding:40px 44px 60px}
+  .slide{min-height:0;height:7.5in;overflow:hidden;page-break-after:always;break-after:page;padding:64px 64px 70px;justify-content:center}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .chrome{padding:20px 64px}
+  .foot{padding:14px 64px}
   .navhint,.progress{display:none}
-  .slide.dark{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:14px}
+  .g3{grid-template-columns:repeat(3,1fr)!important}
+  .g2{grid-template-columns:1fr 1fr!important}
+  .bar{grid-template-columns:190px 1fr 110px!important;font-size:.92rem!important}
+  .lede{font-size:1.05rem}
+  h1{font-size:2.9rem}h2{font-size:1.9rem}
+  .bullets li{font-size:.98rem}
+  .stat .num{font-size:2rem}
 }
 </style>
 </head>
