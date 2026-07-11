@@ -155,12 +155,12 @@ a{color:var(--navy-mid)}
   <h2>Ne kupujete ideju — nadogradnju sustava koji već radi</h2>
   <div class="g3">
     <div class="card stat"><p class="num orange">Live</p><p class="lab"><b>Prototip novčanika</b> — edw-prototip.domovina.ai: 9 ekrana, glasovanje, dokumenti s pravnom analizom, komentari UO-a po ekranu</p></div>
-    <div class="card stat"><p class="num orange">Produkcija</p><p class="lab"><b>Onchain jezgra</b> — wallet/pay.domovina.ai: self-custody EURe novčanik s passkeyem, SEPA→EURe ruta preko Moneriuma, Safe/relayer infrastruktura</p></div>
-    <div class="card stat"><p class="num orange">Produkcija</p><p class="lab"><b>Certilia eID verifikacija</b> (hrvatski osobni identitet, eIDAS High) — već integrirana i radi u našim servisima</p></div>
+    <div class="card stat"><p class="num orange">Isporučeno</p><p class="lab"><b>Whitelabel Safe{Wallet}</b> — native iOS/Android nadogradnja <b>službene Safe aplikacije</b>: račun bez seed fraze (biometrija), QR/payment linkovi, slanje na @ime umjesto 0x adrese, gasless transakcije — sve na Gnosis/EURe</p></div>
+    <div class="card stat"><p class="num orange">Produkcija</p><p class="lab"><b>Certilia eID</b> (eIDAS High) u produkciji + <b>onchain jezgra</b> wallet/pay.domovina.ai (SEPA→EURe preko Moneriuma, Safe/relayer)</p></div>
   </div>
   <ul class="bullets" style="margin-top:1.6rem">
-    <li>Smjer <b>Monerium + Safe + Gnosis</b> UO je već usvojio (sjednica #2) za financije udruge — ovo je isti stack, proširen na članove.</li>
-    <li>Iz iste baze već je nastalo <b>15+ brandiranih prototipova</b> za druge zajednice (udruge, klubovi, zadruge) — e-Demokracija je <b>sjeme</b> te loze i prvi kandidat za produkcijski razvoj.</li>
+    <li><b>Novi brand = jedna konfiguracijska (JSON) datoteka:</b> whitelabel sustav dokazan na 4 živa brand-manifesta — „e-Demokracija" izdanje aplikacije instancira se u danima, ne mjesecima; nasljeđujemo auditiranu Safe jezgru i upstream održavanje.</li>
+    <li>Smjer <b>Monerium + Safe + Gnosis</b> UO je već usvojio (sjednica #2) — isti stack, sada i kao <b>native aplikacija</b>, proširen na članove. Iz iste linije nastalo je i 15+ brandiranih prototipova (e-Demokracija je sjeme loze).</li>
   </ul>
 </section>
 
@@ -171,8 +171,8 @@ a{color:var(--navy-mid)}
   <h2>Tri faze do produkcije</h2>
   <div class="mile">
     <div class="m"><span class="t">Faza 1 ✓</span><div class="d"><b>Design prototip</b> — gotovo i živo. Svi ekrani, tok potvrde otiskom, glasovanje, compliance dokumenti, feedback UO-a u alatu.</div></div>
-    <div class="m"><span class="t">Faza 2 · ~3 mj</span><div class="d"><b>Ekstrakcija jezgre</b> — dokazana onchain jezgra (passkey, Safe, Monerium) izdvaja se u brand-agnostični modul i spaja s e-Dem sučeljem. Prvi pravi novčanici za „ljude od povjerenja" (zatvorena beta, kako je Saša i tražio).</div></div>
-    <div class="m"><span class="t">Faza 3 · ~6 mj</span><div class="d"><b>Produkcija</b> — vlastiti relay, sigurnosni audit, AZOP/GDPR provjera, EURe onboarding članova, javni launch uz edukacijski modul (interni tečaj — model koji je Robert postavio za GitHub).</div></div>
+    <div class="m"><span class="t">Faza 2 · ~2 mj</span><div class="d"><b>e-Dem izdanje Safe aplikacije</b> — brand manifest na isporučenoj whitelabel platformi: naše boje i ime, @ime.edemokracija.eth identiteti, Gnosis/EURe. Zatvorena beta (TestFlight / interni track) za „ljude od povjerenja" (kako je Saša i tražio). Web prototip ostaje edukacijski ulaz.</div></div>
+    <div class="m"><span class="t">Faza 3 · ~5 mj</span><div class="d"><b>Produkcija</b> — App Store / Google Play objava, vlastiti gateway, sigurnosni audit našeg sloja (Safe jezgra je već auditirana), AZOP/GDPR provjera, EURe onboarding članova (Monerium SEPA), edukacijski modul (interni tečaj — model koji je Robert postavio za GitHub).</div></div>
   </div>
   <div class="note"><b>Princip isporuke:</b> svaka tranša veže se uz vidljiv, provjerljiv rezultat (milestone) — u duhu transparentnosti koju tražimo od drugih.</div>
 </section>
@@ -186,7 +186,7 @@ a{color:var(--navy-mid)}
     <li>Otvoreni protokol (ITalk d.o.o., Zagreb) koji <b>državni eID login</b> (Certilia danas, EU digitalni novčanik EUDI sutra) pretvara u <b>neprenosivi dokaz osobnosti</b> na mreži Gnosis.</li>
     <li><b>Jedna osoba = jedan identitet</b>, koliko god novčanika imala — jedinstvenost jamči kriptografski otisak OIB-a (nullifier); <b>sam OIB nikad ne ide na lanac</b> ni u ijednu bazu (GDPR by design).</li>
     <li>100% open source; regulirane funkcije (izdavanje identiteta, KYC, e-novac) ostaju kod licenciranih institucija — ITalk je isključivo softver.</li>
-    <li>Status: pametni ugovori MVP-a napisani i pokriveni s 55 testova (100% pokrivenost); pilot faza slijedi.</li>
+    <li>Status: MVP ugovori (IdentityRegistry, PersonhoodSBT, verifieri) + <b>KunaToken</b> po EMT modelu — ukupno <b>100 testova, 100% pokrivenost</b>; pilot faza slijedi.</li>
   </ul>
   <div class="q" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.75)"><b style="color:#fff">Zašto to nama treba?</b> Passkey dokazuje da glasa isti uređaj — airKUNA dokazuje da glasa <b style="color:#fff">jedan građanin</b>. Bez toga je svako online glasovanje ranjivo na višestruke račune.</div>
 </section>
@@ -200,7 +200,8 @@ a{color:var(--navy-mid)}
     <tr><th>Sloj</th><th>e-Dem novčanik</th><th>airKUNA</th></tr>
     <tr><td>Mreža</td><td colspan="2" style="text-align:center"><b>Gnosis Chain</b> — ista mreža, naknada ~0,001 €, namira ~5 s</td></tr>
     <tr><td>Novac</td><td colspan="2" style="text-align:center"><b>Monerium EURe</b> — isti regulirani euro (MiCA e-novac, 1:1)</td></tr>
-    <tr><td>Račun</td><td colspan="2" style="text-align:center"><b>Safe</b> pametni sef + <b>passkey</b> — ista self-custody arhitektura</td></tr>
+    <tr><td>Račun</td><td colspan="2" style="text-align:center"><b>Safe</b> pametni sef + biometrija — ista self-custody arhitektura</td></tr>
+    <tr><td>Aplikacija</td><td colspan="2" style="text-align:center"><b>službeni Safe{Wallet}</b> (whitelabel) — auditirana jezgra, naš brand i @ime.edemokracija.eth</td></tr>
     <tr class="hero"><td>Identitet</td><td>passkey (uređaj)</td><td><b>+ dokaz osobnosti iz eID-a</b> (građanin)</td></tr>
   </table>
   <ul class="bullets" style="margin-top:1.4rem">
@@ -266,7 +267,7 @@ a{color:var(--navy-mid)}
   <p class="eyebrow">Prijedlog financiranja — za raspravu</p>
   <h2>60.000 € u tri tranše, vezane uz isporuke</h2>
   <div class="uof">
-    <div class="row"><span><b>T1 · Faza 2</b> — ekstrakcija + beta</span><span class="track"><span class="fill" style="width:33%"></span></span><span class="val">20.000 €</span></div>
+    <div class="row"><span><b>T1 · Faza 2</b> — e-Dem app + beta</span><span class="track"><span class="fill" style="width:33%"></span></span><span class="val">20.000 €</span></div>
     <div class="row"><span><b>T2 · Faza 3</b> — produkcija + audit</span><span class="track"><span class="fill" style="width:42%"></span></span><span class="val">25.000 €</span></div>
     <div class="row"><span><b>T3</b> — launch + 6 mj podrške</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="val">15.000 €</span></div>
   </div>
@@ -284,7 +285,7 @@ a{color:var(--navy-mid)}
   <p class="eyebrow">Mjerljivo</p>
   <h2>12 mjeseci — što ćete moći provjeriti</h2>
   <div class="mile">
-    <div class="m"><span class="t">M1–M3</span><div class="d"><b>Zatvorena beta:</b> prvih 5–10 novčanika („ljudi od povjerenja") — prva stvarna članarina od 1 € stiže onchain, javno vidljiva. <i>Isplata T1 po isporuci.</i></div></div>
+    <div class="m"><span class="t">M1–M3</span><div class="d"><b>Zatvorena beta e-Dem aplikacije</b> (native, na Safe whitelabel platformi): prvih 5–10 novčanika („ljudi od povjerenja") — prva stvarna članarina od 1 € stiže onchain, javno vidljiva; slanje na @ime.edemokracija.eth. <i>Isplata T1 po isporuci.</i></div></div>
     <div class="m"><span class="t">M4–M6</span><div class="d"><b>Prvo glasovanje s dokazom osobnosti:</b> odluka zajednice izglasana uz airKUNA identitet — pilot „glasanje žive udruge". AZOP/GDPR dopis predan.</div></div>
     <div class="m"><span class="t">M7–M9</span><div class="d"><b>Produkcijski launch:</b> sigurnosni audit završen, EURe onboarding otvoren članstvu, edukacijski modul objavljen. <i>Isplata T2 po isporuci.</i></div></div>
     <div class="m"><span class="t">M10–M12</span><div class="d"><b>Adopcija:</b> cilj ≥ 50 aktivnih novčanika (poklapa se s Tominim donatorskim lijevkom) i ≥ 3 provedena glasovanja. <i>Isplata T3 po isporuci.</i></div></div>
@@ -299,10 +300,10 @@ a{color:var(--navy-mid)}
   <table class="tbl">
     <tr><th>Rizik</th><th>Mitigacija</th></tr>
     <tr><td><b>Regulativa</b> (MiCA, e-novac)</td><td>Ne izdajemo novac: EURe izdaje licencirani Monerium (EMI). edEUR je dizajniran izvan MiCA okvira (neprenosiv, diskrecijski). Pravni pregled: Krunoslav + vanjski po potrebi; AZOP dopis prije launcha.</td></tr>
-    <tr><td><b>Adopcija</b> (hoće li članovi koristiti?)</td><td>PWA — instalira se bez app storea; ulaz otiskom bez ijedne lozinke; edukacijski modul po Robertovom modelu internog tečaja; beta samo s ljudima od povjerenja (Sašin uvjet).</td></tr>
+    <tr><td><b>Adopcija</b> (hoće li članovi koristiti?)</td><td>Prava native aplikacija iz App Storea / Google Playa + web PWA za ostale; ulaz biometrijom bez ijedne lozinke; edukacijski modul po Robertovom modelu internog tečaja; beta samo s ljudima od povjerenja (Sašin uvjet).</td></tr>
     <tr><td><b>Izgubljeni uređaj / ključ</b></td><td>Passkey se sinkronizira kroz Apple/Google račun; s airKUNA slojem i <b>eID postaje oporavak</b> — ponovna prijava vraća pristup sefu.</td></tr>
     <tr><td><b>Ovisnost o jednom dobavljaču</b></td><td>Sve je open source (Apache-2.0/MIT); udruga u svakom trenutku ima kod, podatke (javni lanac!) i pravo angažirati bilo koga drugog.</td></tr>
-    <tr><td><b>Tehnički sigurnosni rizik</b></td><td>Safe je najkorišteniji smart-account standard (čuva desetke mlrd $); naš kod ide na vanjski audit prije otvaranja članstvu (T2).</td></tr>
+    <tr><td><b>Tehnički sigurnosni rizik</b></td><td>Gradimo na <b>službenoj Safe{Wallet} aplikaciji</b> (auditirana jezgra koja čuva desetke mlrd $); naš whitelabel sloj drži se odvojeno (stock build ostaje bit-identičan službenom) i ide na vanjski audit prije otvaranja članstvu (T2).</td></tr>
   </table>
 </section>
 
@@ -314,7 +315,7 @@ a{color:var(--navy-mid)}
   <ul class="bullets">
     <li><b>ITalk d.o.o.</b> (Zagreb, osnovan 2016.) — nositelj razvoja; brand airKUNA. Non-custodial software provider: nikad ne drži tuđi novac ni identitete.</li>
     <li><b>Matija Stepanić</b> — član UO e-Demokracije (programer, automatizacija zapisnika, financijska infrastruktura) i autor cijelog stacka: novčanik, Certilia integracija, transkripcijski pipeline, GIS karta.</li>
-    <li>Već isporučeno i živo: self-custody EURe novčanik s SEPA rutom, Safe/relayer infrastruktura, eID verifikacija u produkciji, 15+ brandiranih prototipova novčanika, airKUNA MVP ugovori (55 testova).</li>
+    <li>Već isporučeno: <b>whitelabel platforma na službenom Safe{Wallet} kodu</b> (native iOS/Android — račun bez seeda, payment linkovi, @username identiteti, ugrađena tržnica), self-custody EURe novčanik s SEPA rutom, eID verifikacija u produkciji, 15+ brandiranih prototipova, airKUNA MVP ugovori (100 testova, uklj. KunaToken EMT).</li>
   </ul>
   <div class="pill">wallet.domovina.ai</div><div class="pill">pay.domovina.ai</div><div class="pill">airkuna.com</div><div class="pill">edw-prototip.domovina.ai</div>
   <div class="note"><b>Transparentnost i ovdje:</b> Matija je istovremeno član UO i vlasnik izvođača — zato o ovom prijedlogu <b>ne glasa</b>, odluku donose ostali članovi UO, a svi ugovori i isporuke su javni prema članstvu.</div>
