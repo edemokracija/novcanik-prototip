@@ -9,7 +9,7 @@ prvi pravi DOMOVINA Wallet customer. Faza 1: sve je vizualno, **mock podaci** (`
 **nema onchain logike**. GitHub: `edemokracija/novcanik-prototip` (repo namjerno
 `-prototip`; ime `novcanik` rezervirano za **pravi** wallet nakon iteracije).
 
-- **Live:** https://edemokracija-novcanik.pages.dev
+- **Live:** https://edw-prototip.domovina.ai
 - **Lokalni dir:** `/Users/ms/git/e-demokracija/novcanik`
 - **CF Pages projekt:** `edemokracija-novcanik` (account `7dc7167b7e2e00923bfa7cd697df14e4` = D.O.M.)
 
