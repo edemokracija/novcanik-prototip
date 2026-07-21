@@ -54,8 +54,11 @@ CLOUDFLARE_ACCOUNT_ID=7dc7167b7e2e00923bfa7cd697df14e4 \
 
 ## Dokumentacija s dijagramima
 
-`/dokumenti`, `/dokumenti/uvjeti-koristenja`, `/dokumenti/edeur`, `/dokumenti/porezi` renderiraju
-`docs/compliance/*.md` (single source, `?raw` import) s **mermaid** dijagramima. `marked` + `mermaid`
+`/dokumenti`, `/dokumenti/uvjeti-koristenja`, `/dokumenti/edeur`, `/dokumenti/porezi`,
+`/dokumenti/isplativost`, `/dokumenti/roadmap` renderiraju `docs/compliance/*.md` +
+`docs/ROADMAP.md` (single source, `?raw` import) s **mermaid** dijagramima.
+`docs/ROADMAP.md` = fazni plan prototip→pravi novčanik (V/S metrika 0–100, Δ=V−S,
+quadrantChart + gantt); nova doc stranica = `?raw` import + unos u `DOCS` mapu u `DocsPage.tsx`. `marked` + `mermaid`
 su **lazy chunk** (glavni bundle ostaje malen). Boje u dijagramima: 🟩 porez se plaća, 🟧 olakšica/izuzeće, 🔴 zabrana.
 
 ## Gotchas (naučeno teško — ne ponavljaj)
@@ -72,6 +75,23 @@ su **lazy chunk** (glavni bundle ostaje malen). Boje u dijagramima: 🟩 porez s
 4. **CF Pages SW keš:** uvijek hard refresh nakon deploya da se vidi nova verzija.
 5. **Hrvatska množina:** koristi `plural(n, [one, few, many])` iz `mock.ts` (tjedan/tjedna/tjedana).
 6. **iOS PWA:** `apple-mobile-web-app-capable` + `apple-touch-icon` + manifest; instalacija samo iz Safarija.
+7. **Mermaid `quadrantChart`:** labele osi/kvadranata/točaka pisati **bez navodnika i bez
+   dijakritika** (parse pukne; flowchart podnosi č/ž, quadrant ne testirano — ASCII sigurno).
+   `withDirection()` dira samo `flowchart|graph`, pa gantt/quadrant prolaze netaknuti.
+
+## Prezentacije (`public/*/index.html`, statični HTML deckovi)
+
+- **/prezentacija** (16 sl., UO edukativni: kako radi + ekonomika), **/investicija** (14 sl., UO
+  ask 60 t€ PRIJEDLOG, Safe whitelabel narativ), **/pitch** (15 sl., vanjski investitor: koraci
+  1–9, ekonomski + društveni benefiti, roadmap faze, airKUNA, A/B/C modeli).
+- Format: scroll-snap slajdovi, strelice/F/P tipkovnica, progress bar, `?s=N` deep-link,
+  print = 16:9 PDF (`@page 13.333in 7.5in`). Novi deck = kopiraj CSS iz postojećeg (SSOT je
+  duplikat po decku, svjesno — bez build koraka).
+- ⚠️ Narativ razvoja u deckovima je **Safe whitelabel platforma** (e-Dem brand manifest na
+  službenom Safe{Wallet} kodu), dok CLAUDE.md plan faza 2–3 gore opisuje stariju ekstrakciju
+  pay.domovina.ai — pri izmjenama uskladiti s deckovima (whitelabel je noviji smjer).
+- Ne tvrditi da postoji: fiat on/off-ramp, order-book backend, fiskalizacija. airKUNA seed
+  brojke (750 t€) su ITalk razina — ne miješati s e-Dem iznosima.
 
 ## Backport iz loze (07-10)
 

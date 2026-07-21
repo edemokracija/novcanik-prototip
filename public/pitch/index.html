@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<meta name="theme-color" content="#173863" />
+<link rel="icon" type="image/svg+xml" href="/brand/fingerprint.svg" />
+<title>Novčanik zajednice — pitch za investitore · e-Demokracija</title>
+<style>
+@font-face{font-family:'ZonaPro';src:url('/fonts/ZonaPro-Light.woff2') format('woff2');font-weight:300;font-display:swap}
+@font-face{font-family:'ZonaPro';src:url('/fonts/ZonaPro-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+:root{
+  --navy:#173863; --navy-deep:#0f2747; --navy-mid:#2e5791;
+  --orange:#f7941d; --orange-soft:#fff3e2;
+  --page:#edf3f8; --surface:#ffffff; --ink:#162236; --mute:#60708a;
+  --line:#dbe4ee; --good:#1e8e5a; --bad:#c0392b;
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'ZonaPro',system-ui,sans-serif;font-weight:300;color:var(--ink);background:var(--page)}
+b,strong,h1,h2,h3,.sb{font-weight:600}
+.deck{height:100vh;height:100svh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.slide{position:relative;scroll-snap-align:start;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:76px clamp(24px,6vw,96px) 84px;background:var(--page)}
+.slide.dark{background:radial-gradient(900px 560px at 82% 4%,rgba(247,148,29,.18),transparent 60%),linear-gradient(160deg,var(--navy-deep),var(--navy) 58%,#1d4373);color:#fff}
+.chrome{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(24px,6vw,96px);pointer-events:none}
+.chrome img{height:22px;display:block}
+.chrome .pg{font-size:.78rem;color:var(--mute);letter-spacing:.08em}
+.slide.dark .chrome .pg{color:rgba(255,255,255,.55)}
+.progress{position:fixed;left:0;bottom:0;height:4px;background:var(--orange);width:0;z-index:50;transition:width .25s ease}
+.navhint{position:fixed;right:16px;bottom:14px;z-index:50;font-size:.72rem;color:var(--mute);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;opacity:.9}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);font-weight:600}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.04;letter-spacing:-.01em;color:var(--navy);margin-top:.5rem}
+.slide.dark h1{color:#fff}
+h2{font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.08;color:var(--navy);margin-top:.4rem}
+.slide.dark h2{color:#fff}
+.lede{margin-top:1rem;font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.55;color:var(--mute);max-width:64ch}
+.slide.dark .lede{color:rgba(255,255,255,.78)}
+.mute{color:var(--mute)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:1.4rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:1.4rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:0 10px 30px -18px rgba(15,39,71,.22)}
+.card h3{font-size:1.02rem;color:var(--navy);margin-bottom:.4rem}
+.card p{font-size:.92rem;line-height:1.5;color:var(--mute)}
+.slide.dark .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);box-shadow:none}
+.slide.dark .card h3{color:#fff}
+.slide.dark .card p{color:rgba(255,255,255,.72)}
+.bullets{margin-top:1.2rem;display:grid;gap:.75rem;max-width:72ch}
+.bullets li{list-style:none;position:relative;padding-left:1.7rem;font-size:clamp(.95rem,1.5vw,1.08rem);line-height:1.5}
+.bullets li::before{content:"";position:absolute;left:0;top:.45em;width:9px;height:9px;border-radius:999px;background:var(--orange)}
+.note{margin-top:1.3rem;border-left:4px solid var(--orange);background:var(--orange-soft);border-radius:0 14px 14px 0;padding:14px 18px;font-size:.92rem;line-height:1.5;max-width:76ch}
+.slide.dark .note{background:rgba(247,148,29,.12);color:rgba(255,255,255,.85)}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:1.3rem;background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--line);font-size:clamp(.8rem,1.4vw,.95rem)}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-weight:600}
+.tbl td{padding:10px 14px;border-top:1px solid var(--line);line-height:1.45;vertical-align:top}
+.tbl tr.hero td{background:var(--orange-soft)}
+.tbl .win{color:var(--good);font-weight:600}
+.tbl .lose{color:var(--bad);font-weight:600}
+.stat .num{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat .lab{font-size:.85rem;color:var(--mute);margin-top:.2rem;line-height:1.4}
+.slide.dark .stat .num{color:#fff}
+.stat .num.orange{color:var(--orange)}
+.stat .num.lose{color:var(--bad)}
+.step{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--orange);color:#fff;font-weight:600;font-size:1.15rem;margin-bottom:.6rem}
+.q{font-size:.88rem;line-height:1.5;border-left:3px solid var(--navy-mid);padding-left:14px;color:var(--mute);margin-top:1rem;max-width:70ch}
+.q b{color:var(--navy)}
+.bars{margin-top:1.4rem;display:grid;gap:14px;max-width:760px}
+.bar{display:grid;grid-template-columns:190px 1fr 110px;align-items:center;gap:12px;font-size:.92rem}
+.bar .track{height:26px;border-radius:8px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.bar .fill{display:block;height:100%;border-radius:7px 0 0 7px}
+.bar .val{font-variant-numeric:tabular-nums;font-weight:600;color:var(--navy);text-align:right}
+.bar.k .fill{background:var(--navy-mid)}
+.bar.w .fill{background:var(--orange)}
+.uof{margin-top:1.4rem;display:grid;gap:14px;max-width:760px}
+.uof .row{display:grid;grid-template-columns:230px 1fr 130px;align-items:center;gap:12px;font-size:.92rem}
+.uof .track{height:26px;border-radius:8px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.uof .fill{display:block;height:100%;background:var(--orange);border-radius:7px 0 0 7px}
+.uof .row:nth-child(2) .fill{background:var(--navy-mid)}
+.uof .row:nth-child(3) .fill{background:var(--navy)}
+.uof .val{font-variant-numeric:tabular-nums;font-weight:600;color:var(--navy);text-align:right}
+.flow{display:flex;align-items:stretch;gap:10px;margin-top:1.5rem;flex-wrap:wrap}
+.flow .fbox{flex:1 1 150px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.flow .fbox b{display:block;color:var(--navy);font-size:.95rem}
+.flow .fbox span{font-size:.8rem;color:var(--mute);line-height:1.35;display:block;margin-top:.25rem}
+.flow .arr{align-self:center;color:var(--orange);font-weight:600;font-size:1.25rem}
+.slide.dark .flow .fbox{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16)}
+.slide.dark .flow .fbox b{color:#fff}
+.slide.dark .flow .fbox span{color:rgba(255,255,255,.68)}
+.mile{margin-top:1.4rem;display:grid;gap:12px;max-width:78ch}
+.mile .m{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:start}
+.mile .m .t{font-weight:600;color:var(--orange);font-size:.9rem;padding-top:2px}
+.mile .m .d{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:.92rem;line-height:1.5;color:var(--ink)}
+.mile .m .d b{color:var(--navy)}
+.slide.dark .mile .m .d{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.85)}
+.slide.dark .mile .m .d b{color:#fff}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.2rem}
+.pill{display:inline-block;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.82rem;color:var(--navy)}
+.slide.dark .pill{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+.cta{display:inline-block;align-self:flex-start;margin-top:1.4rem;background:var(--orange);color:#fff;font-weight:600;border-radius:999px;padding:13px 26px;text-decoration:none}
+a{color:var(--navy-mid)}
+.slide.dark a{color:#ffc477}
+.cta,.slide.dark a.cta{color:#fff}
+.foot{position:absolute;bottom:0;left:0;right:0;padding:14px clamp(24px,6vw,96px);font-size:.72rem;color:var(--mute);display:flex;justify-content:space-between;gap:12px}
+.slide.dark .foot{color:rgba(255,255,255,.45)}
+.fp{width:120px;height:120px;margin-bottom:1.2rem}
+.legal{font-size:.74rem;line-height:1.5;color:var(--mute);margin-top:1.2rem;max-width:80ch}
+.slide.dark .legal{color:rgba(255,255,255,.5)}
+@media(max-width:900px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.uof .row{grid-template-columns:130px 1fr 100px;font-size:.8rem}.bar{grid-template-columns:120px 1fr 90px;font-size:.8rem}.mile .m{grid-template-columns:1fr}.deck{scroll-snap-type:y proximity}.slide{padding-top:64px}}
+@media print{
+  @page{size:13.333in 7.5in;margin:0}
+  html,body{background:var(--page)}
+  .deck{height:auto;overflow:visible;scroll-snap-type:none}
+  .slide{min-height:0;height:7.5in;overflow:hidden;page-break-after:always;break-after:page;padding:64px 64px 70px;justify-content:center}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .chrome{padding:20px 64px}
+  .foot{padding:14px 64px}
+  .navhint,.progress{display:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:15px}
+  .g3{grid-template-columns:repeat(3,1fr)!important}
+  .g2{grid-template-columns:1fr 1fr!important}
+  .uof .row{grid-template-columns:230px 1fr 130px!important;font-size:.92rem!important}
+  .bar{grid-template-columns:190px 1fr 110px!important;font-size:.92rem!important}
+  .mile .m{grid-template-columns:130px 1fr!important}
+  .lede{font-size:1.05rem}
+  h1{font-size:2.9rem}h2{font-size:1.9rem}
+  .bullets li{font-size:.98rem}
+  .stat .num{font-size:2rem}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="navhint">← → strelice · F cijeli ekran · P ispis/PDF</div>
+<div class="deck" id="deck">
+
+<!-- 1 · NASLOVNICA -->
+<section class="slide dark">
+  <div class="chrome"><img src="/brand/logo-horizontal-white.svg" alt="e-Demokracija" /><span class="pg">1 / 15</span></div>
+  <img class="fp" src="/brand/fingerprint.svg" alt="" />
+  <p class="eyebrow">Pitch za investitore · srpanj 2026.</p>
+  <h1>Novčanik zajednice.<br/>Infrastruktura povjerenja.</h1>
+  <p class="lede">Self-custody novčanik s <b>reguliranim eurom</b> i javno provjerljivom blagajnom — za udrugu e-Demokracija danas, za svaku udrugu, zadrugu i klub sutra. Prototip je živ; tražimo partnera za razvoj produkcijske aplikacije.</p>
+  <div class="foot"><span>Povjerljivo · nije javna ponuda</span><span>Pripremio: Matija Stepanić · ITalk d.o.o. · član UO e-Demokracije</span></div>
+</section>
+
+<!-- 2 · SAŽETAK -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">2 / 15</span></div>
+  <p class="eyebrow">Sažetak — ako pamtite samo jedan slajd</p>
+  <h2>Što, zašto i zašto baš sada</h2>
+  <ul class="bullets">
+    <li><b>Što:</b> digitalni novčanik u kojem je novac <b>u vlasništvu člana</b> (self-custody), valuta je <b>euro e-novac reguliranog EU izdavatelja</b> (Monerium EURe), a svaka uplata udruzi <b>javno je provjerljiva</b> — provizija 0 %, mrežni trošak ~0,001 €.</li>
+    <li><b>Zašto:</b> klasični kanali pojedu do <b>40 % tjedne članarine od 1 €</b> — a upravo mikrouplate čine model moderne građanske udruge. Uz to, banka ne može ponuditi javni uvid koji transparentna organizacija obećava.</li>
+    <li><b>Zašto sada:</b> tehnička jezgra je isporučena i radi (whitelabel na službenoj Safe aplikaciji + eID u produkciji); EU rok za digitalni identitet (eIDAS 2.0) je kraj 2026. — prozor da se postavi standard.</li>
+    <li><b>Prvi kupac postoji:</b> udruga e-Demokracija (živ prototip, UO je usvojio tehnološki smjer) — a model se <b>replicira</b> na 50.000+ udruga u Hrvatskoj.</li>
+  </ul>
+</section>
+
+<!-- 3 · PROBLEM -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">3 / 15</span></div>
+  <p class="eyebrow">Problem</p>
+  <h2>Mikrouplate su budućnost članstva — i nijedan kanal ih ne podnosi</h2>
+  <p class="lede">Model moderne udruge su male, česte uplate (1 € tjedno, 5–30 € donacije). Fiksne naknade upravo takve uplate čine besmislenima — a netransparentnost ubija povjerenje donatora.</p>
+  <div class="g3">
+    <div class="card stat"><p class="num lose">do 40%</p><p class="lab">trošak tjedne članarine od 1 € — hrvatske banke naplaćuju fiksni nalog 0,25–0,40 € pošiljatelju</p></div>
+    <div class="card stat"><p class="num lose">27%</p><p class="lab">iste uplate pojede kartica (Stripe EEA: 1,5 % + 0,25 € fiksno)</p></div>
+    <div class="card stat"><p class="num">0 uvida</p><p class="lab">bankovni izvod vidi samo blagajnik — donator nikad ne vidi je li i kamo njegova uplata stvarno sjela</p></div>
+  </div>
+  <div class="note">Posljedica: donator racionalno <b>ne šalje</b> male iznose — a mali, redoviti iznosi su dugoročno najstabilniji prihod neprofitnog sektora.</div>
+</section>
+
+<!-- 4 · RJEŠENJE -->
+<section class="slide dark">
+  <div class="chrome"><img src="/brand/logo-horizontal-white.svg" alt="" /><span class="pg">4 / 15</span></div>
+  <p class="eyebrow">Rješenje</p>
+  <h2>Svaki član dobiva vlastiti digitalni sef — udruga javnu, automatsku blagajnu</h2>
+  <div class="g3">
+    <div class="card"><h3>Self-custody</h3><p>Novac je u digitalnom sefu člana (Safe pametni ugovor). Udruga, banka ni razvojni tim nemaju pristup — do trenutka kad član sam potvrdi uplatu otiskom prsta.</p></div>
+    <div class="card"><h3>Regulirani euro</h3><p>EURe — euro e-novac licenciranog EU izdavatelja (Monerium, EMI), 1 : 1 s eurom, 100 % pokriće. Nije špekulativna kripto-valuta: nema tečaja, nema volatilnosti.</p></div>
+    <div class="card"><h3>Javna transparentnost</h3><p>Svaka uplata i isplata vidljiva svima, u stvarnom vremenu, trajno i nepromjenjivo — na javnom lancu, ne na serveru koji se može mijenjati.</p></div>
+  </div>
+  <p class="lede" style="margin-top:1.6rem">Kako to radi u praksi? Devet koraka — sažeto na dva slajda.</p>
+</section>
+
+<!-- 5 · KORACI 1–4 -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">5 / 15</span></div>
+  <p class="eyebrow">Korak po korak · 1–4 · novac</p>
+  <h2>Od otiska prsta do uplate bez posrednika</h2>
+  <div class="mile">
+    <div class="m"><span class="t">1 · Identitet</span><div class="d"><b>Ulaz otiskom prsta ili licem</b> (passkey / Face ID) — bez lozinki i bez „seed fraze". Ključ čuva sigurnosni čip telefona; ista tehnologija kojom se građani već prijavljuju u banke.</div></div>
+    <div class="m"><span class="t">2 · Sef</span><div class="d">Novčanik u pozadini otvara <b>Safe</b> — digitalni sef na mreži Gnosis, u isključivom vlasništvu člana. Ista auditirana arhitektura koja globalno čuva <b>desetke milijardi dolara</b>.</div></div>
+    <div class="m"><span class="t">3 · Euro</span><div class="d">Nadoplata običnom <b>SEPA uplatom</b> s bilo koje banke → u sefu je <b>EURe</b>. Prijenos košta ~0,001 € i namiruje se za ~5 sekundi, 0–24.</div></div>
+    <div class="m"><span class="t">4 · Uplata</span><div class="d">Član odabere iznos → <b>potvrdi otiskom</b> → cijeli iznos stiže na namjenski račun udruge. Jedna potvrda može atomično raspodijeliti uplatu na više fondova (MultiSend).</div></div>
+  </div>
+</section>
+
+<!-- 6 · KORACI 5–9 -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">6 / 15</span></div>
+  <p class="eyebrow">Korak po korak · 5–9 · zajednica</p>
+  <h2>Od blagajne do participativne demokracije</h2>
+  <div class="mile">
+    <div class="m"><span class="t">5 · Članarina</span><div class="d"><b>Prepaid model:</b> jedna potvrda podmiruje N razdoblja unaprijed (12 tjedana × 1 €); push-podsjetnik javi kad istječe. Nema auto-terećenja — automatizacija bez gubitka kontrole.</div></div>
+    <div class="m"><span class="t">6 · Transparentnost</span><div class="d">Blagajna udruge <b>javna u stvarnom vremenu</b>; donatori anonimni po defaultu (pseudonim), javno ime samo uz GDPR privolu. Isplate idu kroz multisig UO-a (3-od-5).</div></div>
+    <div class="m"><span class="t">7 · Namjenski računi</span><div class="d">Svaki projekt = zaseban javni fond s brojačem prema cilju — <b>interni crowdfunding</b>: član sam usmjerava svoj novac po projektima.</div></div>
+    <div class="m"><span class="t">8 · edEUR</span><div class="d">Volonterski rad dobiva <b>neprenosivu digitalnu potvrdu</b> (loyalty token izvan MiCA okvira) — rad za zajednicu se vidi i vrednuje.</div></div>
+    <div class="m"><span class="t">9 · Glasovanje</span><div class="d">Isti identitet služi za odluke zajednice: <b>1 član = 1 glas</b>, javno provjerljiv rezultat — participativni budžet kao funkcija, ne ideal.</div></div>
+  </div>
+</section>
+
+<!-- 7 · EKONOMIKA 1 -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">7 / 15</span></div>
+  <p class="eyebrow">Ekonomski benefiti · 1/2</p>
+  <h2>Jedini kanal bez fiksne naknade — na ijednoj strani</h2>
+  <table class="tbl">
+    <tr><th>Kanal</th><th>Naknada po uplati</th><th>Na 1 € (tjedna čl.)</th><th>Na 30 € (donacija)</th><th>Na 100 € (punopravna čl.)</th></tr>
+    <tr class="hero"><td><b>e-Dem novčanik</b></td><td class="win">~0,001 € (mreža)</td><td class="win">~0%</td><td class="win">~0%</td><td class="win">~0%</td></tr>
+    <tr><td>Kartica (Stripe EEA)</td><td>1,5% + 0,25 €</td><td class="lose">0,27 € · 27%</td><td>0,70 € · 2,3%</td><td>1,75 € · 1,75%</td></tr>
+    <tr><td>IBAN / SEPA (HR banke)</td><td>0,25–0,40 € — plaća donator</td><td class="lose">do 40%</td><td>~1,3%</td><td>~0,4%</td></tr>
+    <tr><td>Humanitarni SMS</td><td>fiksne denominacije, posebna akcija</td><td>ne postoji opcija</td><td>~5 poruka</td><td>~15 poruka</td></tr>
+  </table>
+  <div class="note"><b>Poanta za investitora:</b> ovo nije „jeftinija provizija" — ovo je kanal koji <b>omogućuje kategoriju uplata koja danas ne postoji</b> (mikročlanarine), jer fiksni trošak pada s 0,25–0,40 € na tisućinku eura.</div>
+</section>
+
+<!-- 8 · EKONOMIKA 2 -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">8 / 15</span></div>
+  <p class="eyebrow">Ekonomski benefiti · 2/2</p>
+  <h2>Što ostaje zajednici — brojke kroz 5 godina</h2>
+  <p class="lede">Ilustrativni scenarij: 137 aktivnih članova × 1 €/tjedno (7.124 €/god). Kumulativni trošak kanala:</p>
+  <div class="bars" role="img" aria-label="Kumulativne naknade kroz 5 godina: kartica 9.440 €, IBAN do 14.248 €, novčanik 35 €">
+    <div class="bar k"><span>Kartica (naknade)</span><span class="track"><span class="fill" style="width:66%"></span></span><span class="val">≈ 9.440 €</span></div>
+    <div class="bar k"><span>IBAN (trošak donatora)</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">do 14.248 €</span></div>
+    <div class="bar w"><span><b>Novčanik</b> (mreža)</span><span class="track"><span class="fill" style="width:0.5%;min-width:4px"></span></span><span class="val">≈ 35 €</span></div>
+  </div>
+  <div class="g3" style="margin-top:1.6rem">
+    <div class="card stat"><p class="num orange">≈ 9.400 €</p><p class="lab">ušteda naspram kartice u 5 godina — na samo jednoj udruzi ove veličine</p></div>
+    <div class="card stat"><p class="num orange">0 €</p><p class="lab">infrastrukturni trošak udruge nakon launcha — bez pretplata na procesore, POS-ove i platne servise</p></div>
+    <div class="card stat"><p class="num orange">100%</p><p class="lab">donacije (projekcija 1.000–1.500 €/mj) stižu cijele — uz javni dokaz donatoru da je uplata sjela u odabrani fond</p></div>
+  </div>
+  <p class="mute" style="font-size:.8rem;margin-top:.8rem">Iznosi ILUSTRATIVNI; metodologija u dokumentu „Isplativost" — edw-prototip.domovina.ai/dokumenti/isplativost</p>
+</section>
+
+<!-- 9 · DRUŠTVENI BENEFITI -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">9 / 15</span></div>
+  <p class="eyebrow">Društveni benefiti</p>
+  <h2>Povjerenje kao proizvod — demokracija kao mehanizam</h2>
+  <div class="g2">
+    <div class="card"><h3>Radikalna transparentnost</h3><p>„Svaki euro vidljiv članstvu" prestaje biti obećanje i postaje tehničko svojstvo sustava — organizacija koja traži transparentnu državu sama posluje javno provjerljivo.</p></div>
+    <div class="card"><h3>Participativni budžet</h3><p>Članovi izravno usmjeravaju novac na projekte i glasuju o prioritetima — sudjelovanje umjesto pasivnog plaćanja. Angažman raste jer se doprinos vidi.</p></div>
+    <div class="card"><h3>1 član = 1 glas</h3><p>Digitalno glasovanje bez botova i višestrukih računa, s javno provjerljivim brojanjem — temelj vjerodostojne e-demokracije, primjenjiv i šire od jedne udruge.</p></div>
+    <div class="card"><h3>Privatnost + vrednovanje rada</h3><p>Donatori anonimni po defaultu (GDPR by design); volonterski rad dobiva vidljivo, neprenosivo priznanje (edEUR) — motivacija bez komercijalizacije.</p></div>
+  </div>
+  <div class="note"><b>Šira slika:</b> u Hrvatskoj je registrirano 50.000+ udruga, uz zadruge, sindikate, klubove i mjesne odbore — svi dijele isti problem naknada i povjerenja. e-Demokracija je <b>referentna implementacija</b>; 15+ brandiranih prototipova iste linije već pokazuje da se model replicira konfiguracijom, ne razvojem.</div>
+</section>
+
+<!-- 10 · DE-RISKED -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">10 / 15</span></div>
+  <p class="eyebrow">De-risked</p>
+  <h2>Ne financirate ideju — nego zadnju dionicu puta</h2>
+  <div class="g3">
+    <div class="card stat"><p class="num orange">Live</p><p class="lab"><b>Prototip novčanika</b> — edw-prototip.domovina.ai: 9 ekrana, glasovanje, pravno-tehnička dokumentacija, roadmap s metrikom prioriteta</p></div>
+    <div class="card stat"><p class="num orange">Isporučeno</p><p class="lab"><b>Whitelabel platforma na službenoj Safe aplikaciji</b> (native iOS/Android): račun bez seed fraze, QR/payment linkovi, slanje na @ime, gasless transakcije — 4 živa brand-manifesta</p></div>
+    <div class="card stat"><p class="num orange">Produkcija</p><p class="lab"><b>Certilia eID</b> (eIDAS High) verifikacija u produkciji + onchain jezgra sa SEPA→EURe rutom (Monerium)</p></div>
+  </div>
+  <ul class="bullets" style="margin-top:1.6rem">
+    <li><b>Novi brand = konfiguracijska datoteka:</b> „e-Demokracija" izdanje aplikacije instancira se u danima — nasljeđujemo auditiranu Safe jezgru i njezino upstream održavanje.</li>
+    <li><b>Prvi kupac je već odlučio:</b> UO udruge usvojio je smjer Monerium + Safe + Gnosis (sjednica #2) i dao strukturirani feedback na prototip kroz ugrađeni alat za komentare.</li>
+  </ul>
+</section>
+
+<!-- 11 · ROADMAP -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">11 / 15</span></div>
+  <p class="eyebrow">Plan isporuke</p>
+  <h2>Pet faza — svaka je samostalan, provjerljiv proizvod</h2>
+  <p class="lede">Redoslijed nije intuicija: svih 20 funkcionalnosti prototipa ocijenjeno je metrikom <b>vrijednost i složenost 0–100</b>; gradi se ono s najvećim omjerom vrijednosti i troška. Puna analiza javna: /dokumenti/roadmap.</p>
+  <div class="mile">
+    <div class="m"><span class="t">F1 · mj. 1–2</span><div class="d"><b>MVP novčanik</b> — onboarding otiskom, SEPA nadoplata, prva donacija. <i>Kriterij: stvarna EURe donacija end-to-end na produkciji.</i></div></div>
+    <div class="m"><span class="t">F2 · mj. 3</span><div class="d"><b>Članarina + javna blagajna</b> — prepaid model, push podsjetnici, javni zapisnik s GDPR privolama. <i>Kriterij: ≥ 10 članova plaća kroz aplikaciju.</i></div></div>
+    <div class="m"><span class="t">F3 · mj. 4</span><div class="d"><b>Projekti i kampanje</b> — namjenski fondovi, interni crowdfunding s brojačima. <i>Kriterij: ≥ 2 aktivna projekta.</i></div></div>
+    <div class="m"><span class="t">F4 · mj. 5</span><div class="d"><b>Glasovanje</b> — 1 član = 1 glas na primitivima iz F1–F3. <i>Kriterij: prva stvarna članska anketa.</i></div></div>
+    <div class="m"><span class="t">F5 · mj. 6–7</span><div class="d"><b>edEUR nagrade</b> — nakon pravne potvrde MiCA granice. <i>Kriterij: prvi edEUR za stvarni volonterski rad.</i></div></div>
+  </div>
+</section>
+
+<!-- 12 · TIMING -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">12 / 15</span></div>
+  <p class="eyebrow">Zašto sada</p>
+  <h2>Prozor prilike: 2026./2027.</h2>
+  <div class="g3">
+    <div class="card stat"><p class="num">kraj 2026.</p><p class="lab"><b>eIDAS 2.0 rok</b> — svaka EU država mora ponuditi digitalni novčanik identiteta. Hrvatska ga već ima (Certilia); most prema javnom lancu još ne postoji — to je niša.</p></div>
+    <div class="card stat"><p class="num">~27,6 bil. $</p><p class="lab">godišnja namira stablecoina (2024.) — više od Visa + Mastercard zajedno; tehnologija dokazana u velikom</p></div>
+    <div class="card stat"><p class="num">&lt; 1%</p><p class="lab">udio <b>euro</b> stablecoina (~395 mil €) — segment tek nastaje, bez dominantnog igrača u srednjoj Europi</p></div>
+  </div>
+  <ul class="bullets" style="margin-top:1.6rem">
+    <li>MiCA je na snazi: pravila igre su <b>poznata</b> — prednost prelazi s „tko se usudi" na „tko isporuči prvi".</li>
+    <li>Prvi koji spoji <b>državni eID + regulirani euro + javno provjerljivo glasovanje</b> definira standard digitalne demokracije u EU — i drži referentnu implementaciju koju ostali kloniraju.</li>
+  </ul>
+</section>
+
+<!-- 13 · AIRKUNA -->
+<section class="slide dark">
+  <div class="chrome"><img src="/brand/logo-horizontal-white.svg" alt="" /><span class="pg">13 / 15</span></div>
+  <p class="eyebrow">Sinergija · identitetski sloj</p>
+  <h2>airKUNA: dokaz da iza novčanika stoji točno jedan građanin</h2>
+  <ul class="bullets">
+    <li>Otvoreni protokol (ITalk d.o.o.) koji <b>državni eID login</b> pretvara u <b>neprenosivi dokaz osobnosti</b> na lancu — jedna osoba = jedan identitet, koliko god novčanika imala.</li>
+    <li>OIB <b>nikad ne ide na lanac</b> ni u ijednu bazu — jedinstvenost jamči kriptografski otisak (GDPR by design). Regulirane funkcije ostaju kod licenciranih institucija.</li>
+    <li>Status: MVP pametni ugovori + KunaToken (EMT model) — <b>100 testova, 100 % pokrivenost</b>; pilot plan izrijekom predviđa <b>„glasanje žive udruge"</b> — e-Demokracija je taj pilot.</li>
+  </ul>
+  <div class="flow">
+    <div class="fbox"><b>Građanin</b><span>eID / EUDI novčanik</span></div>
+    <div class="arr">→</div>
+    <div class="fbox"><b>airKUNA</b><span>1 osoba = 1 identitet</span></div>
+    <div class="arr">→</div>
+    <div class="fbox"><b>e-Dem novčanik</b><span>članarina · donacije</span></div>
+    <div class="arr">→</div>
+    <div class="fbox"><b>Glasovanje</b><span>1 član = 1 glas</span></div>
+    <div class="arr">→</div>
+    <div class="fbox"><b>Javni uvid</b><span>svaki euro i glas provjerljiv</span></div>
+  </div>
+  <div class="note"><b>Zašto je to investicijski bitno:</b> passkey dokazuje uređaj — airKUNA dokazuje građanina. Kombinacija je jedinstvena ponuda: financije + identitet + glasovanje u istom, otvorenom stacku.</div>
+</section>
+
+<!-- 14 · MODEL ULAGANJA -->
+<section class="slide">
+  <div class="chrome"><img src="/brand/logo-horizontal.svg" alt="" /><span class="pg">14 / 15</span></div>
+  <p class="eyebrow">Prijedlog financiranja — okvir za razgovor</p>
+  <h2>60.000 € u tri tranše — isplata po isporuci, ne po obećanju</h2>
+  <div class="uof">
+    <div class="row"><span><b>T1</b> — e-Dem aplikacija + zatvorena beta</span><span class="track"><span class="fill" style="width:33%"></span></span><span class="val">20.000 €</span></div>
+    <div class="row"><span><b>T2</b> — produkcija + sigurnosni audit</span><span class="track"><span class="fill" style="width:42%"></span></span><span class="val">25.000 €</span></div>
+    <div class="row"><span><b>T3</b> — launch + 6 mj podrške</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="val">15.000 €</span></div>
+  </div>
+  <div class="g3" style="margin-top:1.8rem">
+    <div class="card"><h3>A · Namjenska sredstva udruzi</h3><p>Donacija ili beskamatna pozajmica udruzi, namjenski za razvoj — filantropski model, u okviru neprofitnog statusa; vidljivost prema članstvu i javnosti.</p></div>
+    <div class="card"><h3>B · Ulaganje u ITalk d.o.o.</h3><p>Izravno ulaganje u tvrtku koja razvija tehnologiju (whitelabel platforma + airKUNA) — izloženost cijeloj lozi replikacija, ne jednoj udruzi; uvjeti se dogovaraju zasebno.</p></div>
+    <div class="card"><h3>C · EU grantovi (komplementarno)</h3><p>Identitetski sloj kandidira se za EU sredstva (NGI, Gnosis grantovi) — sufinanciranje koje ne razvodnjava ni udrugu ni ulagača.</p></div>
+  </div>
+  <p class="legal">Iznosi i raspodjela su <b>okvirni prijedlog za razgovor</b>, ne konačna ponuda; konačne odluke o modelu A donose tijela udruge sukladno Statutu. Ovo nije javna ponuda vrijednosnih papira ni investicijski savjet; eventualno ulaganje (model B) uređuje se zasebnim ugovorom uz pravni pregled obiju strana.</p>
+</section>
+
+<!-- 15 · TIM + POZIV -->
+<section class="slide dark">
+  <div class="chrome"><img src="/brand/logo-horizontal-white.svg" alt="" /><span class="pg">15 / 15</span></div>
+  <img class="fp" src="/brand/fingerprint.svg" alt="" />
+  <p class="eyebrow">Tko stoji iza — i što dalje</p>
+  <h2>Tim koji je ovo već izgradio</h2>
+  <ul class="bullets">
+    <li><b>ITalk d.o.o.</b> (Zagreb, 2016.) — nositelj razvoja; non-custodial software provider: nikad ne drži tuđi novac ni identitete. Sve open source — naručitelj u svakom trenutku ima kod i podatke.</li>
+    <li><b>Matija Stepanić</b> — autor cijelog stacka (whitelabel Safe platforma, eID integracija, onchain jezgra, 15+ brandiranih prototipova) i član UO e-Demokracije.</li>
+    <li><b>Sljedeći korak:</b> demo prototipa uživo (10 min) → odabir modela (A/B/C) → term sheet s milestone planom → start faze 1.</li>
+  </ul>
+  <div class="pills"><span class="pill">edw-prototip.domovina.ai</span><span class="pill">wallet.domovina.ai</span><span class="pill">pay.domovina.ai</span><span class="pill">airkuna.com</span></div>
+  <a class="cta" href="https://edw-prototip.domovina.ai" target="_blank" rel="noreferrer">Isprobajte prototip →</a>
+  <p class="legal">Ovaj dokument nije javna ponuda vrijednosnih papira, financijski ni pravni savjet. Brojke označene kao ilustrativne ili projekcije nisu jamstva. Matija Stepanić je istovremeno član UO udruge i vlasnik izvođača — o prijedlozima prema udruzi ne glasa; svi ugovori i isporuke transparentni su prema članstvu.</p>
+  <div class="foot"><span>e-Demokracija · Vaš glas. Vaša odluka.</span><span>Matija Stepanić · stepanic.matija@gmail.com</span></div>
+</section>
+
+</div>
+<script>
+const deck=document.getElementById('deck'),slides=[...document.querySelectorAll('.slide')],prog=document.getElementById('prog');
+const current=()=>Math.round(deck.scrollTop/deck.clientHeight);
+const go=i=>{i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:'smooth'})};
+deck.addEventListener('scroll',()=>{prog.style.width=(current()/(slides.length-1)*100)+'%'},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' ','ArrowDown'].includes(e.key)){e.preventDefault();go(current()+1);}
+  else if(['ArrowLeft','PageUp','ArrowUp'].includes(e.key)){e.preventDefault();go(current()-1);}
+  else if(e.key==='Home'){go(0)} else if(e.key==='End'){go(slides.length-1)}
+  else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+  else if(e.key==='p'||e.key==='P'){window.print()}
+});
+// ?s=N — otvori na N-tom slajdu (deep-link)
+const q=new URLSearchParams(location.search).get('s');
+if(q){const i=Math.max(0,Math.min(slides.length-1,parseInt(q,10)-1));
+  const jump=()=>slides[i].scrollIntoView({behavior:'instant',block:'start'});
+  let n=0;const t=setInterval(()=>{jump();if(++n>=8)clearInterval(t)},180);jump();}
+setTimeout(()=>{const n=document.querySelector('.navhint');if(n){n.style.transition='opacity .6s';n.style.opacity='0';setTimeout(()=>n.remove(),700)}},5000);
+</script>
+</body>
+</html>
