@@ -8,6 +8,7 @@ import uvjetiMd from '../../docs/compliance/uvjeti-koristenja-novcanika.md?raw';
 import edeurMd from '../../docs/compliance/edeur-loyalty-token.md?raw';
 import poreziMd from '../../docs/compliance/porezi-i-transparentnost.md?raw';
 import isplativostMd from '../../docs/compliance/isplativost-novcanika.md?raw';
+import roadmapMd from '../../docs/ROADMAP.md?raw';
 
 mermaid.initialize({
   startOnLoad: false,
@@ -48,6 +49,12 @@ const DOCS: Record<string, { slug: string; title: string; blurb: string; md: str
     title: 'Isplativost — novčanik vs. ostali kanali',
     blurb: 'Zašto mikrouplate (članarina 1 €/tjedno!) imaju smisla samo onchain — usporedba s karticom, IBAN-om i SMS-om.',
     md: isplativostMd,
+  },
+  roadmap: {
+    slug: 'roadmap',
+    title: 'Roadmap razvoja',
+    blurb: 'Faze od prototipa do pravog novčanika — vrijednost/složenost 0–100, matrica prioriteta i gantt vremenska crta.',
+    md: roadmapMd,
   },
 };
 
